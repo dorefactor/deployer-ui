@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SpecificationsComponent } from './specifications/specifications.component';
+import { ConfigurationFormComponent } from './configuration-form/configuration-form.component';
 
 const routes: Routes = [
   {
-    path: 'specifications', component: SpecificationsComponent
+    path: 'configuration', component: ConfigurationFormComponent
   }
 ];
 

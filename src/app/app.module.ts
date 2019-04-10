@@ -3,24 +3,26 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SpecificationsComponent } from './specifications/specifications.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
+import { ConfigurationFormComponent } from './configuration-form/configuration-form.component';
+import { AngularMaterialModule } from './angular-material/module/angular-material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SpecificationsComponent,
     HeaderComponent,
     HomeComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    ConfigurationFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
