@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { KeyValuePair } from '../models/key-value-pair';
 
 @Component({
   selector: 'app-configuration-form',
   templateUrl: './configuration-form.component.html',
   styleUrls: ['./configuration-form.component.sass']
 })
-export class ConfigurationFormComponent implements OnInit {
+export class ConfigurationFormComponent {
 
-  hide = true;
+  public hide = true;
 
-  constructor() { }
-
-  ngOnInit() {
+  public onEnvironmentVariablesChange(environmentVariables: Array<KeyValuePair>) {
+    console.log(environmentVariables);
   }
 
-  public add() {
-    return true;
+  public onPortsChange(ports: Array<KeyValuePair>) {
+    console.log(ports);
   }
 
 }

@@ -9,7 +9,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ConfigurationFormComponent } from './configuration-form/configuration-form.component';
 import { AngularMaterialModule } from './angular-material/module/angular-material.module';
-import { EnvironmentVariablesComponent } from './environment-variables/environment-variables.component';
+import { KeyValuePairComponent } from './key-value-pair/key-value-pair.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { EnvironmentVariablesComponent } from './environment-variables/environme
     SidebarComponent,
     FooterComponent,
     ConfigurationFormComponent,
-    EnvironmentVariablesComponent
+    KeyValuePairComponent
   ],
   imports: [
     BrowserModule,

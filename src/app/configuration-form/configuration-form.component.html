@@ -66,12 +66,12 @@
         </div>
         <div class="form-group">
           <div>
-            <app-environment-variables [title]="'Environemnt Variables'"></app-environment-variables>
+            <app-key-value-pair [title]="'Environemnt Variables'"(keyValuePairsChange)="onEnvironmentVariablesChange($event)"></app-key-value-pair>
           </div>
         </div>
         <div class="form-group">
           <div>
-            <app-environment-variables [title]="'Exposed Ports'"></app-environment-variables>
+            <app-key-value-pair [title]="'Exposed Ports'" (keyValuePairsChange)="onPortsChange($event)"></app-key-value-pair>
           </div>
         </div>
 
