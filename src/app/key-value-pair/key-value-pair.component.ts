@@ -12,6 +12,12 @@ export class KeyValuePairComponent implements OnInit {
   @Input()
   public title: string;
 
+  @Input()
+  public keyPlaceholder: string;
+
+  @Input()
+  public valuePlaceholder: string;
+
   @Output()
   public keyValuePairsChange: EventEmitter<Array<KeyValuePair>> = new EventEmitter<Array<KeyValuePair>>();
 

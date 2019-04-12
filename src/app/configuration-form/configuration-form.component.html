@@ -1,5 +1,5 @@
 <div class="content">
-  <form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="card">
       <div class="card-header bg-secondary text-white">
         Host Configuration
@@ -7,24 +7,25 @@
       <div class="card-body">
         <div class="form-group">
           <mat-form-field>
-            <input matInput placeholder="Store Configuration As">
+            <input matInput formControlName="configurationName" placeholder="Store Configuration As">
           </mat-form-field>
         </div>
         <div class="form-group">
           <mat-form-field>
-            <input matInput placeholder="Host IP Address">
+            <input matInput formControlName="hostIpAddress" placeholder="Host IP Address">
           </mat-form-field>
         </div>
         <div class="form-group">
           <div class="row">
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Host Username">
+                <input matInput formControlName="hostUsername" placeholder="Host Username">
               </mat-form-field>
             </div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Host Username Password" [type]="hide ? 'password' : 'text'">
+                <input matInput formControlName="hostUsernamePassword" placeholder="Host Username Password"
+                  [type]="hide ? 'password' : 'text'">
                 <mat-icon matSuffix (click)="hide = !hide" [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-eye'">
                 </mat-icon>
               </mat-form-field>
@@ -34,14 +35,14 @@
       </div>
     </div>
 
-    <div class="card">
+    <div formGroupName="dockerApplicationConfiguration" class="card">
       <div class="card-header bg-secondary text-white">
         Docker Configuration
       </div>
       <div class="card-body">
         <div class="form-group">
           <mat-form-field>
-            <input matInput placeholder="Store Application As">
+            <input matInput formControlName="applicationName" placeholder="Store Application As">
           </mat-form-field>
         </div>
 
@@ -49,32 +50,35 @@
           <div class="row">
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Docker Registry">
+                <input matInput formControlName="registryUrl" placeholder="Registry Url">
               </mat-form-field>
             </div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Docker Image">
+                <input matInput formControlName="imageName" placeholder="Image">
               </mat-form-field>
             </div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Docker Tag">
+                <input matInput formControlName="imageTag" placeholder="Tag">
               </mat-form-field>
             </div>
           </div>
         </div>
         <div class="form-group">
           <div>
-            <app-key-value-pair [title]="'Environemnt Variables'"(keyValuePairsChange)="onEnvironmentVariablesChange($event)"></app-key-value-pair>
+            <app-key-value-pair [title]="'Environemnt Variables'" [keyPlaceholder]="'Variable Name'"
+              [valuePlaceholder]="'Variable Value'" (keyValuePairsChange)="onEnvironmentVariablesChange($event)">
+            </app-key-value-pair>
           </div>
         </div>
         <div class="form-group">
           <div>
-            <app-key-value-pair [title]="'Exposed Ports'" (keyValuePairsChange)="onPortsChange($event)"></app-key-value-pair>
+            <app-key-value-pair [title]="'Exposed Ports'" [keyPlaceholder]="'External Port'"
+              [valuePlaceholder]="'Internal Port'" (keyValuePairsChange)="onPortsChange($event)">
+            </app-key-value-pair>
           </div>
         </div>
-
       </div>
     </div>
     <!-- <div class="form-group">
@@ -85,5 +89,11 @@
         </mat-form-field>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button> -->
+    <div class="actions-container">
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit">Save</button>
+      </div>
+    </div>
+
   </form>
 </div>
