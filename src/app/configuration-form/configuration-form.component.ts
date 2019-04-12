@@ -14,4 +14,8 @@ export class ConfigurationFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  public add() {
+    return true;
+  }
+
 }

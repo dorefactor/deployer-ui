@@ -9,6 +9,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ConfigurationFormComponent } from './configuration-form/configuration-form.component';
 import { AngularMaterialModule } from './angular-material/module/angular-material.module';
+import { EnvironmentVariablesComponent } from './environment-variables/environment-variables.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AngularMaterialModule } from './angular-material/module/angular-materia
     HomeComponent,
     SidebarComponent,
     FooterComponent,
-    ConfigurationFormComponent
+    ConfigurationFormComponent,
+    EnvironmentVariablesComponent
   ],
   imports: [
     BrowserModule,

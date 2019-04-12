@@ -1,51 +1,39 @@
-html
-    min-height: 100%
-    position: relative
-
-body
-    height: 100%
-
 .content-container
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 0
-    right: 0
-    overflow: hidden
-    z-index: -1
+    // position: relative
+    height: 100%
+    width: 100%
+    // border: solid black
+    display: table
 
 .header
-    float: left
-    width: 100%
-    height: 5%
     background: linear-gradient(90deg, #DCDCDC, #6A696C)
-
-.footer
-    float: left
-    width: 100%
+    // border: solid green
+    display: table-row
     height: 5%
 
 .main
-    float: left
+    height: 100%
     width: 100%
-    height: 90%
-
-.main__container
-    position: absolute
-    width: 100%
-    height: 90%
+    // border: solid grey
+    display: table
 
 .sidebar
-    width: 20%
-    height: 100%
     float: left
-    background: linear-gradient(90deg, #7E04CC, #5D489A)
-
-.main__container
-    position: absolute
     height: 100%
+    width: 20%
+    background: linear-gradient(90deg, #7E04CC, #5D489A)
+    // border: solid red
+    display: table-cell
 
 .content
-    width: 80%
-    height: 100%
     float: left
+    height: 100%
+    width: 80%
+    // border: solid blue
+    display: table-cell
+
+.footer
+    height: 5%
+    width: 100%
+    // border: solid yellow    
+    display: table-row
