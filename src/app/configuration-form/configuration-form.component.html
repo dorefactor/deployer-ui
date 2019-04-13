@@ -2,26 +2,21 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="card">
       <div class="card-header bg-secondary text-white">
-        Basic Configuration
+        Setup
       </div>
       <div class="card-body">
         <div class="form-group">
           <mat-form-field>
-            <input matInput formControlName="configurationName" placeholder="Store Configuration As">
+            <input matInput formControlName="name" placeholder="Store As">
           </mat-form-field>
         </div>
       </div>
     </div>
-    <div formGroupName="dockerApplicationConfiguration" class="card">
+    <div formGroupName="dockerSetup" class="card">
       <div class="card-header bg-secondary text-white">
-        Docker Configuration
+        Docker Setup
       </div>
       <div class="card-body">
-        <div class="form-group">
-          <mat-form-field>
-            <input matInput formControlName="applicationName" placeholder="Store Application As">
-          </mat-form-field>
-        </div>
         <div class="form-group">
           <div class="row">
             <div class="col">
@@ -54,7 +49,7 @@
     </div>
     <div class="card">
       <div class="card-header bg-secondary text-white">
-        Hosts Configuration
+        Hosts Setup
       </div>
       <div class="card-body">
         <div class="form-group">

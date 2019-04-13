@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyValuePair } from '../models/key-value-pair';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ApplicationConfiguration } from '../models/application-configuration';
+import { ApplicationSetup } from '../models/application-setup';
 import { TuplaThree } from '../models/tupla-three';
+import { ApplicationSetupService } from '../services/application-setup.service';
 
 @Component({
   selector: 'app-configuration-form',
@@ -17,13 +18,13 @@ export class ConfigurationFormComponent implements OnInit {
   private ports: Array<KeyValuePair>;
   private hosts: Array<TuplaThree>;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private applicationSetupService: ApplicationSetupService) { }
 
   public ngOnInit(): void {
     this.form = this.formBuilder.group({
-      configurationName: '',
-      dockerApplicationConfiguration: this.formBuilder.group({
-        applicationName: '',
+      name: '',
+      dockerSetup: this.formBuilder.group({
         registryUrl: '',
         imageName: ''
       })
@@ -43,12 +44,12 @@ export class ConfigurationFormComponent implements OnInit {
   }
 
   public onSubmit() {
-    const applicationConfiguration: ApplicationConfiguration = this.form.value;
-    applicationConfiguration.dockerApplicationConfiguration.environmentVariables = this.environmentVariables;
-    applicationConfiguration.dockerApplicationConfiguration.ports = this.ports;
-    applicationConfiguration.hostsConfiguration = this.hosts;
+    const applicationSetup: ApplicationSetup = this.form.value;
+    applicationSetup.dockerSetup.environmentVariables = this.environmentVariables;
+    applicationSetup.dockerSetup.ports = this.ports;
+    applicationSetup.hosts = this.hosts;
 
-    console.log(JSON.stringify(applicationConfiguration));
+    this.applicationSetupService.saveApplicationSetup(applicationSetup).subscribe();
   }
 
 }

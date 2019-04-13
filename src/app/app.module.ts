@@ -11,6 +11,7 @@ import { ConfigurationFormComponent } from './configuration-form/configuration-f
 import { AngularMaterialModule } from './angular-material/module/angular-material.module';
 import { KeyValuePairComponent } from './key-value-pair/key-value-pair.component';
 import { TuplaThreeComponent } from './tupla-three/tupla-three.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TuplaThreeComponent } from './tupla-three/tupla-three.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
