@@ -34,11 +34,6 @@
                 <input matInput formControlName="imageName" placeholder="Image">
               </mat-form-field>
             </div>
-            <div class="col">
-              <mat-form-field>
-                <input matInput formControlName="imageTag" placeholder="Tag">
-              </mat-form-field>
-            </div>
           </div>
         </div>
         <div class="form-group">
@@ -65,7 +60,7 @@
         <div class="form-group">
           <div>
             <app-tupla-three [title]="'Hosts'" [valuePlaceholder1]="'Host IP'" [valuePlaceholder2]="'Username'"
-              [valuePlaceholder3]="'Password'" (tuplaThreeChange)="onEnvironmentVariablesChange($event)">
+              [valuePlaceholder3]="'Password'" (tuplaThreeChange)="onTuplaThreeChange($event)">
             </app-tupla-three>
           </div>
         </div>

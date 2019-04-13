@@ -25,8 +25,7 @@ export class ConfigurationFormComponent implements OnInit {
       dockerApplicationConfiguration: this.formBuilder.group({
         applicationName: '',
         registryUrl: '',
-        imageName: '',
-        imageTag: ''
+        imageName: ''
       })
     });
   }
@@ -49,7 +48,7 @@ export class ConfigurationFormComponent implements OnInit {
     applicationConfiguration.dockerApplicationConfiguration.ports = this.ports;
     applicationConfiguration.hostsConfiguration = this.hosts;
 
-    console.log(applicationConfiguration);
+    console.log(JSON.stringify(applicationConfiguration));
   }
 
 }

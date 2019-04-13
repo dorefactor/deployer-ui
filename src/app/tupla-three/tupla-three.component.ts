@@ -49,16 +49,16 @@ export class TuplaThreeComponent implements OnInit {
       this.tuplaThree = this.tuplaThreeFormArray.value;
     }
     this.isEdit = !this.isEdit;
-    this.ontuplaThreeChange();
+    this.onTuplaThreeChange();
   }
 
   public onDelete(index: number): void {
     this.tuplaThree.splice(index, 1);
     this.tuplaThreeFormArray.removeAt(index);
-    this.ontuplaThreeChange();
+    this.onTuplaThreeChange();
   }
 
-  public ontuplaThreeChange(): void {
+  public onTuplaThreeChange(): void {
     this.tuplaThreeChange.emit(this.tuplaThree);
   }
 
