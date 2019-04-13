@@ -22,9 +22,6 @@ export class ConfigurationFormComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.formBuilder.group({
       configurationName: '',
-      hostIpAddress: '',
-      hostUsername: '',
-      hostUsernamePassword: '',
       dockerApplicationConfiguration: this.formBuilder.group({
         applicationName: '',
         registryUrl: '',
@@ -50,6 +47,7 @@ export class ConfigurationFormComponent implements OnInit {
     const applicationConfiguration: ApplicationConfiguration = this.form.value;
     applicationConfiguration.dockerApplicationConfiguration.environmentVariables = this.environmentVariables;
     applicationConfiguration.dockerApplicationConfiguration.ports = this.ports;
+    applicationConfiguration.hostsConfiguration = this.hosts;
 
     console.log(applicationConfiguration);
   }
