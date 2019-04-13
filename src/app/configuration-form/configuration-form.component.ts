@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeyValuePair } from '../models/key-value-pair';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApplicationConfiguration } from '../models/application-configuration';
+import { TuplaThree } from '../models/tupla-three';
 
 @Component({
   selector: 'app-configuration-form',
@@ -14,6 +15,7 @@ export class ConfigurationFormComponent implements OnInit {
   public form: FormGroup;
   private environmentVariables: Array<KeyValuePair>;
   private ports: Array<KeyValuePair>;
+  private hosts: Array<TuplaThree>;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -38,6 +40,10 @@ export class ConfigurationFormComponent implements OnInit {
 
   public onPortsChange(ports: Array<KeyValuePair>) {
     this.ports = ports;
+  }
+
+  public onTuplaThreeChange(hosts: Array<TuplaThree>) {
+    this.hosts = hosts;
   }
 
   public onSubmit() {

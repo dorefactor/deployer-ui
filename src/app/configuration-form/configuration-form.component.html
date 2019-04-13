@@ -2,35 +2,13 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="card">
       <div class="card-header bg-secondary text-white">
-        Host Configuration
+        Basic Configuration
       </div>
       <div class="card-body">
         <div class="form-group">
           <mat-form-field>
             <input matInput formControlName="configurationName" placeholder="Store Configuration As">
           </mat-form-field>
-        </div>
-        <div class="form-group">
-          <mat-form-field>
-            <input matInput formControlName="hostIpAddress" placeholder="Host IP Address">
-          </mat-form-field>
-        </div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col">
-              <mat-form-field>
-                <input matInput formControlName="hostUsername" placeholder="Host Username">
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-form-field>
-                <input matInput formControlName="hostUsernamePassword" placeholder="Host Username Password"
-                  [type]="hide ? 'password' : 'text'">
-                <mat-icon matSuffix (click)="hide = !hide" [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-eye'">
-                </mat-icon>
-              </mat-form-field>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -44,7 +22,6 @@
             <input matInput formControlName="applicationName" placeholder="Store Application As">
           </mat-form-field>
         </div>
-
         <div class="form-group">
           <div class="row">
             <div class="col">
@@ -76,6 +53,20 @@
             <app-key-value-pair [title]="'Exposed Ports'" [keyPlaceholder]="'External Port'"
               [valuePlaceholder]="'Internal Port'" (keyValuePairsChange)="onPortsChange($event)">
             </app-key-value-pair>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header bg-secondary text-white">
+        Hosts Configuration
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <div>
+            <app-tupla-three [title]="'Hosts'" [valuePlaceholder1]="'Host IP'" [valuePlaceholder2]="'Username'"
+              [valuePlaceholder3]="'Password'" (tuplaThreeChange)="onEnvironmentVariablesChange($event)">
+            </app-tupla-three>
           </div>
         </div>
       </div>

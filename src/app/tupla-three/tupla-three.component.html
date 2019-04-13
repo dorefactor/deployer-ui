@@ -1,0 +1,59 @@
+<div [formGroup]="form">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>{{ title }}
+          <a (click)="onClose()" class="text-info">
+            <i [ngClass]="isEdit ? 'fa fa-times-circle' : 'fa fa-pencil'"></i>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="!isEdit">
+      <tr *ngFor="let element of tuplaThree; let i = index">
+        <td *ngIf="element?.value1">
+          <i (click)="onDelete(i)" class="fa fa-times-circle"></i>
+          {{element.value1}}
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="isEdit">
+      <tr formArrayName="tuplaThree" *ngFor="let element of form.get('tuplaThree')?.controls; let i = index;">
+        <td>
+          <div [formGroupName]="i" class="input-group">
+            <div class="input-group-prepend">
+              <div (click)="onDelete(i)" class="input-group-text">
+                <i class="fa fa-times-circle"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input matInput placeholder="{{ valuePlaceholder1 }}" formControlName="value1">
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input matInput placeholder="{{ valuePlaceholder2 }}" formControlName="value2">
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input matInput placeholder="{{ valuePlaceholder3 }}" [type]="hide ? 'password' : 'text'">
+                  <mat-icon matSuffix (click)="hide = !hide" [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-eye'">
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="actions">
+          <mat-icon (click)="onAddItem()" class="fa fa-plus-circle actions__action-add"></mat-icon>
+          <mat-icon (click)="onClose()" class="fa fa-check-circle actions__action-save"></mat-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

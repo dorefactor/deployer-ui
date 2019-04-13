@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ConfigurationFormComponent } from './configuration-form/configuration-form.component';
 import { AngularMaterialModule } from './angular-material/module/angular-material.module';
 import { KeyValuePairComponent } from './key-value-pair/key-value-pair.component';
+import { TuplaThreeComponent } from './tupla-three/tupla-three.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { KeyValuePairComponent } from './key-value-pair/key-value-pair.component
     SidebarComponent,
     FooterComponent,
     ConfigurationFormComponent,
-    KeyValuePairComponent
+    KeyValuePairComponent,
+    TuplaThreeComponent
   ],
   imports: [
     BrowserModule,
