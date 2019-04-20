@@ -1,0 +1,32 @@
+<div class="card" [formGroup]="form">
+  <div class="card-header bg-secondary text-white">
+    <a (click)="onClose()" class="text-white">
+      <i [ngClass]="isEdit ? 'fa fa-times-circle' : 'fa fa-pencil'"></i>
+    </a>
+  </div>
+  <div *ngIf="isEdit" class="card-body">
+    <div formArrayName="tags" *ngFor="let element of form.get('tags')?.controls; let i = index;">
+      <div class="row" [formGroupName]="i">
+        <div class="col">
+          <mat-icon (click)="onDelete(i)" class="fa fa-times-circle"></mat-icon>
+          <mat-form-field>
+            <input matInput placeholder="Tag" formControlName="tagName">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <!-- <app-tupla-three></app-tupla-three> -->
+            <app-tupla-three [valuePlaceholder1]="'IP Address'" [valuePlaceholder2]="'Username'"
+              [valuePlaceholder3]="'Password'" (tuplaThreeChange)="onTuplaThreeChange(i, $event)">
+            </app-tupla-three>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isEdit" class="card-footer text-muted">
+    <button (click)="onAddItem()" class="btn btn-secondary btn-lg1" type="button" style="margin-right:10px">Add</button>
+    <button (click)="onClose()" class="btn btn-primary btn-lg1" type="button">Save</button>
+  </div>
+</div>
