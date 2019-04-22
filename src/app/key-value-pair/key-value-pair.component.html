@@ -3,10 +3,34 @@
     <thead>
       <tr>
         <th>
-          {{ title }}
+          <div class="title__container">
+            <div class="title__message">
+              <span>{{ title }}</span>
+            </div>
+            <div (click)="onClose()" class="title__icon icon__cursor-pointer">
+              <fa-icon [icon]="isEdit ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
+            </div>
+          </div>
         </th>
       </tr>
     </thead>
+    <!-- Summary -->
+    <tbody *ngIf="!isEdit">
+      <tr *ngFor="let keyValuePair of keyValuePairs; let i = index">
+        <td *ngIf="keyValuePair?.key">
+          <div>
+            <div (click)="onDelete(i)" class="input-group-text icon__cursor-pointer icon__close">
+              <i class="fa fa-times-circle"></i>
+            </div>
+            <div>
+              <span>{{keyValuePair.key}}</span>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <!-- End Summary -->
+    <!-- Records Edition -->
     <tbody *ngIf="isEdit">
       <tr formArrayName="keyValuePairs"
         *ngFor="let keyValuePair of form['controls'].keyValuePairs['controls']; let keyValuePairIndex = index;">
@@ -49,5 +73,6 @@
         </td>
       </tr>
     </tbody>
+    <!-- End Records Edition -->
   </table>
 </div>
