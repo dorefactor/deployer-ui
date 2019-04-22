@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th>{{ title }}
-          <a (click)="onClose()" class="text-info">
-            <i [ngClass]="isEdit ? 'fa fa-times-circle' : 'fa fa-pencil'"></i>
+          <a (click)="onClose()" class="text-info icon__cursor-pointer">
+            <i [ngClass]="isEdit ? 'fa fa-times-circle' : 'fa fa-pencil-alt'"></i>
           </a>
         </th>
       </tr>
@@ -21,11 +21,11 @@
 
     <tbody *ngIf="isEdit">
       <tr formArrayName="keyValuePairs"
-        *ngFor="let keyValuePair of form.get('keyValuePairs')?.controls; let i = index;">
+        *ngFor="let keyValuePair of form['controls'].keyValuePairs['controls']; let keyValuePairIndex = index;">
         <td>
-          <div [formGroupName]="i" class="input-group">
+          <div [formGroupName]="keyValuePairIndex" class="input-group">
             <div class="input-group-prepend">
-              <div (click)="onDelete(i)" class="input-group-text">
+              <div (click)="onDelete(keyValuePairIndex)" class="input-group-text icon__cursor-pointer">
                 <i class="fa fa-times-circle"></i>
               </div>
             </div>
@@ -46,11 +46,18 @@
       </tr>
       <tr>
         <td class="actions">
-          <!-- <button class="btn btn-secondary btn-lg1" type="button"
-        (click)="addFieldValue()" style="margin-right:10px">Add More Item</button> -->
-          <!-- <button (click)="onEditCloseItems()" class="btn btn-primary btn-lg1" type="button">Save Items</button> -->
-          <mat-icon (click)="onAddItem()" class="fa fa-plus-circle actions__action-add"></mat-icon>
-          <mat-icon (click)="onClose()" class="fa fa-check-circle actions__action-save"></mat-icon>
+          <div>
+            <div class="button__hosts--add">
+              <button mat-mini-fab color="primary" (click)="onAddItem()" type="button">
+                <mat-icon class="fa fa-plus-circle"></mat-icon>
+              </button>
+            </div>
+            <div class="button--check">
+              <button mat-mini-fab [color]="'success'" (click)="onClose()" type="button">
+                <mat-icon class="fa fa-check"></mat-icon>
+              </button>
+            </div>
+          </div>
         </td>
       </tr>
     </tbody>

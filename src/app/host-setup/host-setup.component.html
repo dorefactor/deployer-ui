@@ -1,32 +1,170 @@
-<div class="card" [formGroup]="form">
-  <div class="card-header bg-secondary text-white">
-    <a (click)="onClose()" class="text-white">
-      <i [ngClass]="isEdit ? 'fa fa-times-circle' : 'fa fa-pencil'"></i>
+<div class="card" [formGroup]="hostsSetupForm">
+  <div class="card-header bg-info text-white">
+    <span class="title">Tags</span>
+    <a (click)="onCloseTag()" class="text-white">
+      <i [ngClass]="isEditTags ? 'fa fa-times-circle' : 'fa fa-pencil-alt'"></i>
     </a>
   </div>
-  <div *ngIf="isEdit" class="card-body">
-    <div formArrayName="tags" *ngFor="let element of form.get('tags')?.controls; let i = index;">
-      <div class="row" [formGroupName]="i">
-        <div class="col">
-          <mat-icon (click)="onDelete(i)" class="fa fa-times-circle"></mat-icon>
-          <mat-form-field>
-            <input matInput placeholder="Tag" formControlName="tagName">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <!-- <app-tupla-three></app-tupla-three> -->
-            <app-tupla-three [valuePlaceholder1]="'IP Address'" [valuePlaceholder2]="'Username'"
-              [valuePlaceholder3]="'Password'" (tuplaThreeChange)="onTuplaThreeChange(i, $event)">
-            </app-tupla-three>
+  <div *ngIf="isEditTags" class="card-body">
+    <div formArrayName="tags">
+      <div *ngFor="let tag of hostsSetupForm['controls'].tags['controls']; let tagIndex = index;">
+        <div [formGroupName]="tagIndex">
+          <div class="row">
+            <div class="col">
+              <div (click)="onDeleteTagItem(tagIndex)" class="icon">
+                <mat-icon class="fa fa-times-circle"></mat-icon>
+              </div>
+              <div>
+                <mat-form-field>
+                  <input matInput placeholder="Tag" formControlName="name">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+
+
+
+
+              <!-- Hosts Start -->
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>
+                      <span class="title">Hosts</span>
+                      <a (click)="onCloseHost()" class="text-black">
+                        <i [ngClass]="isEditHosts ? 'fa fa-times-circle' : 'fa fa-pencil-alt'"></i>
+                      </a>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="hosts" *ngIf="isEditHosts">
+                    <tr *ngFor="let host of tag['controls'].hosts['controls']; let hostIndex=index">
+                      <td [formGroupName]="hostIndex">
+                        <i (click)="onDeleteHostItem(hostIndex)" class="fa fa-times-circle"></i>
+                        {{hostIndex.ip}}
+                      </td>
+                    </tr>
+                  </tbody>
+                <tbody *ngIf="isEditHosts">
+                  <tr formArrayName="hosts" *ngFor="let host of tag['controls'].hosts['controls']; let hostIndex=index">
+                    <td>
+                      <div [formGroupName]="hostIndex" class="input-group">
+                        <div class="input-group-prepend">
+                          <div (click)="onDeleteHostItem(hostIndex)" class="input-group-text icon__cursor-pointer">
+                            <i class="fa fa-times-circle"></i>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <mat-form-field>
+                              <input matInput placeholder="IP Address" formControlName="ip">
+                            </mat-form-field>
+                          </div>
+                          <div class="col">
+                            <mat-form-field>
+                              <input matInput placeholder="Username" formControlName="username">
+                            </mat-form-field>
+                          </div>
+                          <div class="col">
+                            <mat-form-field>
+                              <div class="password">
+                                <div class="password__input-text">
+                                  <input matInput placeholder="Password" formControlName="password"
+                                    [type]="hide ? 'password' : 'text'">
+                                </div>
+                                <div (click)="hide = !hide" class="password__icon">
+                                  <mat-icon matSuffix [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                                    class="icon__cursor-pointer">
+                                  </mat-icon>
+                                </div>
+                              </div>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="actions">
+                      <div>
+                        <div class="button__hosts--add">
+                          <button mat-mini-fab color="primary" (click)="onAddHostItem(tagIndex)" type="button">
+                            <mat-icon class="fa fa-laptop-medical"></mat-icon>
+                          </button>
+                        </div>
+                        <div class="button--check">
+                          <button mat-mini-fab [color]="'success'" (click)="onCloseHost()" type="button">
+                            <mat-icon class="fa fa-check"></mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- Hosts End -->
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+
+
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="isEdit" class="card-footer text-muted">
-    <button (click)="onAddItem()" class="btn btn-secondary btn-lg1" type="button" style="margin-right:10px">Add</button>
-    <button (click)="onClose()" class="btn btn-primary btn-lg1" type="button">Save</button>
+  <div *ngIf="isEditTags" class="card-footer text-muted">
+    <div>
+      <div class="button--add">
+        <button mat-raised-button color="accent" (click)="onAddTagItem()" type="button">Add</button>
+      </div>
+      <div class="button--check">
+        <button mat-raised-button color="primary" (click)="onCloseTag()" type="button">Close</button>
+      </div>
+    </div>
   </div>
 </div>

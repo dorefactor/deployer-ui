@@ -1,10 +1,10 @@
 import { DockerSetup as DockerSetup } from './docker-setup';
-import { TuplaThree } from './tupla-three';
+import { TagSetup } from './tag-setup';
 
 export class ApplicationSetup {
 
     public name: string;
     public dockerSetup: DockerSetup;
-    public hosts: Array<TuplaThree>;
+    public hostsSetup: Array<TagSetup>;
 
 }

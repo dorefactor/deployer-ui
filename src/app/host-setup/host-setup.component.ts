@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { TuplaThree } from '../models/tupla-three';
-import { HostSetup } from '../models/host-setup';
+import { TagSetup } from '../models/tag-setup';
 
 @Component({
   selector: 'app-host-setup',
@@ -10,72 +9,77 @@ import { HostSetup } from '../models/host-setup';
 })
 export class HostSetupComponent implements OnInit {
 
-  // @Input()
-  // public title: string;
-
-  // @Input()
-  // public valuePlaceholder1: string;
-
-  // @Input()
-  // public valuePlaceholder2: string;
-
-  // @Input()
-  // public valuePlaceholder3: string;
-
   @Output()
-  public hostsSetupChange: EventEmitter<Array<HostSetup>> = new EventEmitter<Array<HostSetup>>();
+  public hostsSetupChange: EventEmitter<Array<TagSetup>> = new EventEmitter<Array<TagSetup>>();
 
   public hide = true;
-  public form: FormGroup;
-  public formArray: FormArray;
-  public isEdit: boolean;
-  public hostsSetup: Array<HostSetup> = [];
+
+  public hostsSetupForm: FormGroup;
+
+  public isEditTags: boolean;
+  public isEditHosts: boolean;
 
   constructor(private formBuilder: FormBuilder) { }
 
-  public ngOnInit() {
-    this.form = this.formBuilder.group({
-      tags: this.formBuilder.array([])
+  public ngOnInit(): void {
+    this.hostsSetupForm = this.formBuilder.group({
+      tags: this.formBuilder.array([
+        // this.createTagItem()
+      ])
     });
   }
 
-  public onAddItem(): void {
-    this.formArray = this.form.controls.tags as FormArray;
-    this.formArray.push(this.createItem());
-    this.hostsSetup.push(new HostSetup());
+  public onAddTagItem(): void {
+    const tagsControl = this.hostsSetupForm.controls.tags as FormArray;
+    tagsControl.push(this.createTagItem());
   }
 
-  public onClose(): void {
-    // if (this.formArray) {
-    //   this.hostsSetup = this.formArray.value;
-    // }
-    this.isEdit = !this.isEdit;
-    this.onHostsSetupChange();
-    console.log(JSON.stringify(this.hostsSetup));
+  public onCloseTag(): void {
+    this.isEditTags = !this.isEditTags;
   }
 
-  public onDelete(index: number): void {
-    this.hostsSetup.splice(index, 1);
-    this.formArray.removeAt(index);
+  public onDeleteTagItem(index: number): void {
+    const tagsControl = this.hostsSetupForm.controls.tags as FormArray;
+    tagsControl.removeAt(index);
+  }
+
+  public onAddHostItem(index: number): void {
+    const hostsControl = (this.hostsSetupForm.controls.tags as FormArray).at(index).get('hosts') as FormArray;
+    hostsControl.push(this.createHostItem());
+  }
+
+  public onCloseHost(): void {
+    this.isEditHosts = !this.isEditHosts;
     this.onHostsSetupChange();
+  }
+
+  public onDeleteHostItem(index: number): void {
+    const hostsControl = (this.hostsSetupForm.controls.tags as FormArray).at(index).get('hosts') as FormArray;
+    hostsControl.removeAt(index);
   }
 
   public onHostsSetupChange(): void {
-    this.hostsSetupChange.emit(this.hostsSetup);
+    const hostsSetup: Array<TagSetup> = this.hostsSetupForm.value;
+    console.log(JSON.stringify(hostsSetup));
+
+    this.hostsSetupChange.emit(hostsSetup);
   }
 
-  private createItem(): FormGroup {
+  private createTagItem(): FormGroup {
     return this.formBuilder.group({
-      tagName: ''
+      name: '',
+      hosts: this.formBuilder.array([
+        // this.createHostItem()
+      ])
     });
   }
 
-  public onTuplaThreeChange(index: number, hosts: Array<TuplaThree>) {
-    console.log(JSON.stringify(hosts));
-    console.log(index);
-    if (this.hostsSetup[index]) {
-      this.hostsSetup[index].hosts = hosts;
-    }
+  private createHostItem(): FormGroup {
+    return this.formBuilder.group({
+      ip: '',
+      username: '',
+      password: ''
+    });
   }
 
 }
