@@ -14,8 +14,10 @@ export class HostSetupComponent implements OnInit {
 
   public hostsSetupForm: FormGroup;
   public hide = true;
-  public isEditTags = true;
-  public isEditHosts = true;
+  public isEditTags: boolean;
+  public isEditHosts: boolean;
+
+  public tagsSetup: Array<TagSetup> = [];
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -31,12 +33,17 @@ export class HostSetupComponent implements OnInit {
   }
 
   public onCloseTag(): void {
+    if (this.hostsSetupForm.controls.tags) {
+      this.tagsSetup = this.hostsSetupForm.controls.tags.value;
+    }
+    this.isEditTags = !this.isEditTags;
     this.onHostsSetupChange();
   }
 
   public onDeleteTagItem(index: number): void {
     const tagsControl = this.hostsSetupForm.controls.tags as FormArray;
     tagsControl.removeAt(index);
+    this.tagsSetup.splice(index, 1);
   }
 
   public onAddHostItem(index: number): void {
@@ -45,6 +52,10 @@ export class HostSetupComponent implements OnInit {
   }
 
   public onCloseHost(): void {
+    if (this.hostsSetupForm.controls.tags) {
+      this.tagsSetup = this.hostsSetupForm.controls.tags.value;
+    }
+    this.isEditHosts = !this.isEditHosts;
     this.onHostsSetupChange();
   }
 

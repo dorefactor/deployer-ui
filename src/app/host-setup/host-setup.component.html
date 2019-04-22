@@ -1,7 +1,27 @@
 <div class="card" [formGroup]="hostsSetupForm">
-  <div class="card-header bg-info text-white">
+  <div (click)="onCloseTag()" class="card-header bg-info text-white icon__cursor-pointer">
     <span class="title">Tags</span>
+    <fa-icon [icon]="isEditTags ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
   </div>
+  <!-- Tags Summary -->
+  <table class="table table-striped table-bordered tags__summary">
+    <tbody *ngIf="!isEditTags">
+      <tr *ngFor="let tag of tagsSetup; let i = index;">
+        <td>
+          <div>
+            <div (click)="onDeleteTagItem(i)" class="input-group-text icon__cursor-pointer icon__close">
+              <i class="fa fa-times-circle"></i>
+            </div>
+            <div>
+              <span>{{ tag.name }}</span>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- End Tags Summary -->
+  <!-- Tags Edition -->
   <div *ngIf="isEditTags" class="card-body">
     <div formArrayName="tags">
       <div *ngFor="let tag of hostsSetupForm['controls'].tags['controls']; let tagIndex = index;">
@@ -25,10 +45,34 @@
                 <thead>
                   <tr>
                     <th>
-                      <span class="title">Hosts</span>
+                      <div class="hosts-title__container">
+                        <div class="hosts-title__message">
+                          <span>Hosts</span>
+                        </div>
+                        <div (click)="onCloseHost()" class="hosts-title__icon icon__cursor-pointer">
+                          <fa-icon [icon]="isEditHosts ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
+                        </div>
+                      </div>
                     </th>
                   </tr>
                 </thead>
+                <!-- Hosts Summary -->
+                <tbody *ngIf="!isEditHosts && tagsSetup.length > 0">
+                  <tr *ngFor="let host of tagsSetup[tagIndex].hosts; let i = index;">
+                    <td>
+                      <div>
+                        <div (click)="onDeleteHostItem(i)" class="input-group-text icon__cursor-pointer icon__close">
+                          <i class="fa fa-times-circle"></i>
+                        </div>
+                        <div>
+                          <span>{{ host.ip }}</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <!-- End Hosts Summary -->
+                <!-- Hosts Edition -->
                 <tbody *ngIf="isEditHosts">
                   <tr formArrayName="hosts" *ngFor="let host of tag['controls'].hosts['controls']; let hostIndex=index">
                     <td>
@@ -85,6 +129,7 @@
                     </td>
                   </tr>
                 </tbody>
+                <!-- End Hosts Edition -->
               </table>
               <!-- Hosts End -->
             </div>
@@ -93,6 +138,7 @@
       </div>
     </div>
   </div>
+  <!-- End Tags Edition -->
   <div *ngIf="isEditTags" class="card-footer text-muted">
     <div>
       <div class="button--add">
