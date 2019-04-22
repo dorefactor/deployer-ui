@@ -1,9 +1,6 @@
 <div class="card" [formGroup]="hostsSetupForm">
   <div class="card-header bg-info text-white">
     <span class="title">Tags</span>
-    <a (click)="onCloseTag()" class="text-white">
-      <i [ngClass]="isEditTags ? 'fa fa-times-circle' : 'fa fa-pencil-alt'"></i>
-    </a>
   </div>
   <div *ngIf="isEditTags" class="card-body">
     <div formArrayName="tags">
@@ -23,30 +20,15 @@
           </div>
           <div class="row">
             <div class="col">
-
-
-
-
               <!-- Hosts Start -->
               <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
                     <th>
                       <span class="title">Hosts</span>
-                      <a (click)="onCloseHost()" class="text-black">
-                        <i [ngClass]="isEditHosts ? 'fa fa-times-circle' : 'fa fa-pencil-alt'"></i>
-                      </a>
                     </th>
                   </tr>
                 </thead>
-                <tbody formArrayName="hosts" *ngIf="isEditHosts">
-                    <tr *ngFor="let host of tag['controls'].hosts['controls']; let hostIndex=index">
-                      <td [formGroupName]="hostIndex">
-                        <i (click)="onDeleteHostItem(hostIndex)" class="fa fa-times-circle"></i>
-                        {{hostIndex.ip}}
-                      </td>
-                    </tr>
-                  </tbody>
                 <tbody *ngIf="isEditHosts">
                   <tr formArrayName="hosts" *ngFor="let host of tag['controls'].hosts['controls']; let hostIndex=index">
                     <td>
@@ -105,65 +87,23 @@
                 </tbody>
               </table>
               <!-- Hosts End -->
-
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
-
-
         </div>
       </div>
     </div>
   </div>
-
   <div *ngIf="isEditTags" class="card-footer text-muted">
     <div>
       <div class="button--add">
-        <button mat-raised-button color="accent" (click)="onAddTagItem()" type="button">Add</button>
+        <button mat-mini-fab color="accent" (click)="onAddTagItem()" type="button">
+          <mat-icon class="fa fa-plus-circle"></mat-icon>
+        </button>
       </div>
       <div class="button--check">
-        <button mat-raised-button color="primary" (click)="onCloseTag()" type="button">Close</button>
+        <button mat-mini-fab [color]="'success'" (click)="onCloseTag()" type="button">
+          <mat-icon class="fa fa-check"></mat-icon>
+        </button>
       </div>
     </div>
   </div>

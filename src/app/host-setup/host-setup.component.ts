@@ -12,20 +12,16 @@ export class HostSetupComponent implements OnInit {
   @Output()
   public hostsSetupChange: EventEmitter<Array<TagSetup>> = new EventEmitter<Array<TagSetup>>();
 
-  public hide = true;
-
   public hostsSetupForm: FormGroup;
-
-  public isEditTags: boolean;
-  public isEditHosts: boolean;
+  public hide = true;
+  public isEditTags = true;
+  public isEditHosts = true;
 
   constructor(private formBuilder: FormBuilder) { }
 
   public ngOnInit(): void {
     this.hostsSetupForm = this.formBuilder.group({
-      tags: this.formBuilder.array([
-        // this.createTagItem()
-      ])
+      tags: this.formBuilder.array([])
     });
   }
 
@@ -35,7 +31,7 @@ export class HostSetupComponent implements OnInit {
   }
 
   public onCloseTag(): void {
-    this.isEditTags = !this.isEditTags;
+    this.onHostsSetupChange();
   }
 
   public onDeleteTagItem(index: number): void {
@@ -49,7 +45,6 @@ export class HostSetupComponent implements OnInit {
   }
 
   public onCloseHost(): void {
-    this.isEditHosts = !this.isEditHosts;
     this.onHostsSetupChange();
   }
 
@@ -60,17 +55,13 @@ export class HostSetupComponent implements OnInit {
 
   public onHostsSetupChange(): void {
     const hostsSetup: Array<TagSetup> = this.hostsSetupForm.value;
-    console.log(JSON.stringify(hostsSetup));
-
     this.hostsSetupChange.emit(hostsSetup);
   }
 
   private createTagItem(): FormGroup {
     return this.formBuilder.group({
       name: '',
-      hosts: this.formBuilder.array([
-        // this.createHostItem()
-      ])
+      hosts: this.formBuilder.array([])
     });
   }
 

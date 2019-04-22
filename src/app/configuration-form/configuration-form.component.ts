@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { KeyValuePair } from '../models/key-value-pair';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApplicationSetup } from '../models/application-setup';
-import { TuplaThree } from '../models/tupla-three';
 import { ApplicationSetupService } from '../services/application-setup.service';
 import { TagSetup } from '../models/tag-setup';
 

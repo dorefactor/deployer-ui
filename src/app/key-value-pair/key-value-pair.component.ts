@@ -23,7 +23,7 @@ export class KeyValuePairComponent implements OnInit {
 
   public form: FormGroup;
   public keyValuePairsFormArray: FormArray;
-  public isEdit: boolean;
+  public isEdit = true;
   public keyValuePairs: Array<KeyValuePair> = [];
 
   constructor(private formBuilder: FormBuilder) { }
@@ -39,17 +39,14 @@ export class KeyValuePairComponent implements OnInit {
     this.keyValuePairsFormArray.push(this.createItem());
   }
 
-  public onClose(): void {
-    if (this.keyValuePairsFormArray) {
-      this.keyValuePairs = this.keyValuePairsFormArray.value;
-    }
-    this.isEdit = !this.isEdit;
-    this.onKeyValuePairsChange();
-  }
-
   public onDelete(index: number): void {
     this.keyValuePairs.splice(index, 1);
     this.keyValuePairsFormArray.removeAt(index);
+    this.onKeyValuePairsChange();
+  }
+
+  public onClose(): void {
+    this.keyValuePairs = this.keyValuePairsFormArray.value;
     this.onKeyValuePairsChange();
   }
 
