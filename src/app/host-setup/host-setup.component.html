@@ -1,39 +1,39 @@
 <div class="card" [formGroup]="hostsSetupForm">
-  <div (click)="onCloseTag()" class="card-header bg-info text-white icon__cursor-pointer">
-    <span class="title">Tags</span>
-    <fa-icon [icon]="isEditTags ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
+  <div (click)="onCloseHostsSetup()" class="card-header bg-info text-white icon__cursor-pointer">
+    <span class="title">Host Tags</span>
+    <fa-icon [icon]="isEditHostsSetup ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
   </div>
-  <!-- Tags Summary -->
-  <table class="table table-striped table-bordered tags__summary">
-    <tbody *ngIf="!isEditTags">
-      <tr *ngFor="let tag of tagsSetup; let i = index;">
+  <!-- Host Tags Summary -->
+  <table class="table table-striped table-bordered host_tags__summary">
+    <tbody *ngIf="!isEditHostsSetup">
+      <tr *ngFor="let hostSetup of hostsSetup; let i = index;">
         <td>
           <div>
-            <div (click)="onDeleteTagItem(i)" class="input-group-text icon__cursor-pointer icon__close">
+            <div (click)="onDeleteHostsSetupItem(i)" class="input-group-text icon__cursor-pointer icon__close">
               <i class="fa fa-times-circle"></i>
             </div>
             <div>
-              <span>{{ tag.name }}</span>
+              <span>{{ hostSetup.tagName }}</span>
             </div>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
-  <!-- End Tags Summary -->
-  <!-- Tags Edition -->
-  <div *ngIf="isEditTags" class="card-body">
-    <div formArrayName="tags">
-      <div *ngFor="let tag of hostsSetupForm['controls'].tags['controls']; let tagIndex = index;">
-        <div [formGroupName]="tagIndex">
+  <!-- End Host Tags Summary -->
+  <!-- Host Tags Edition -->
+  <div *ngIf="isEditHostsSetup" class="card-body">
+    <div formArrayName="hostsSetup">
+      <div *ngFor="let hostSetup of hostsSetupForm['controls'].hostsSetup['controls']; let hostSetupIndex = index;">
+        <div [formGroupName]="hostSetupIndex">
           <div class="row">
             <div class="col">
-              <div (click)="onDeleteTagItem(tagIndex)" class="icon">
+              <div (click)="onDeleteHostsSetupItem(hostSetupIndex)" class="icon">
                 <mat-icon class="fa fa-times-circle"></mat-icon>
               </div>
               <div>
                 <mat-form-field>
-                  <input matInput placeholder="Tag" formControlName="name">
+                  <input matInput placeholder="Hosts Tag Name" formControlName="tagName">
                 </mat-form-field>
               </div>
             </div>
@@ -49,7 +49,7 @@
                         <div class="hosts-title__message">
                           <span>Hosts</span>
                         </div>
-                        <div (click)="onCloseHost()" class="hosts-title__icon icon__cursor-pointer">
+                        <div (click)="onCloseHosts()" class="hosts-title__icon icon__cursor-pointer">
                           <fa-icon [icon]="isEditHosts ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
                         </div>
                       </div>
@@ -57,11 +57,11 @@
                   </tr>
                 </thead>
                 <!-- Hosts Summary -->
-                <tbody *ngIf="!isEditHosts && tagsSetup.length > 0">
-                  <tr *ngFor="let host of tagsSetup[tagIndex].hosts; let i = index;">
+                <tbody *ngIf="!isEditHosts && hostsSetup.length > 0">
+                  <tr *ngFor="let host of hostsSetup[hostSetupIndex].hosts; let i = index;">
                     <td>
                       <div>
-                        <div (click)="onDeleteHostItem(i)" class="input-group-text icon__cursor-pointer icon__close">
+                        <div (click)="onDeleteHostsItem(i)" class="input-group-text icon__cursor-pointer icon__close">
                           <i class="fa fa-times-circle"></i>
                         </div>
                         <div>
@@ -74,11 +74,12 @@
                 <!-- End Hosts Summary -->
                 <!-- Hosts Edition -->
                 <tbody *ngIf="isEditHosts">
-                  <tr formArrayName="hosts" *ngFor="let host of tag['controls'].hosts['controls']; let hostIndex=index">
+                  <tr formArrayName="hosts"
+                    *ngFor="let host of hostSetup['controls'].hosts['controls']; let hostIndex=index">
                     <td>
                       <div [formGroupName]="hostIndex" class="input-group">
                         <div class="input-group-prepend">
-                          <div (click)="onDeleteHostItem(hostIndex)" class="input-group-text icon__cursor-pointer">
+                          <div (click)="onDeleteHostsItem(hostIndex)" class="input-group-text icon__cursor-pointer">
                             <i class="fa fa-times-circle"></i>
                           </div>
                         </div>
@@ -116,12 +117,12 @@
                     <td class="actions">
                       <div>
                         <div class="button__hosts--add">
-                          <button mat-mini-fab color="primary" (click)="onAddHostItem(tagIndex)" type="button">
+                          <button mat-mini-fab color="primary" (click)="onAddHostsItem(hostSetupIndex)" type="button">
                             <mat-icon class="fa fa-laptop-medical"></mat-icon>
                           </button>
                         </div>
                         <div class="button--check">
-                          <button mat-mini-fab [color]="'success'" (click)="onCloseHost()" type="button">
+                          <button mat-mini-fab [color]="'success'" (click)="onCloseHosts()" type="button">
                             <mat-icon class="fa fa-check"></mat-icon>
                           </button>
                         </div>
@@ -138,16 +139,16 @@
       </div>
     </div>
   </div>
-  <!-- End Tags Edition -->
-  <div *ngIf="isEditTags" class="card-footer text-muted">
+  <!-- End Host Tags Edition -->
+  <div *ngIf="isEditHostsSetup" class="card-footer text-muted">
     <div>
       <div class="button--add">
-        <button mat-mini-fab color="accent" (click)="onAddTagItem()" type="button">
+        <button mat-mini-fab color="accent" (click)="onAddHostsSetupItem()" type="button">
           <mat-icon class="fa fa-plus-circle"></mat-icon>
         </button>
       </div>
       <div class="button--check">
-        <button mat-mini-fab [color]="'success'" (click)="onCloseTag()" type="button">
+        <button mat-mini-fab [color]="'success'" (click)="onCloseHostsSetup()" type="button">
           <mat-icon class="fa fa-check"></mat-icon>
         </button>
       </div>

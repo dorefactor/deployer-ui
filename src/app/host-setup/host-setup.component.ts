@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { TagSetup } from '../models/tag-setup';
+import { HostSetup } from '../models/host-setup';
 
 @Component({
   selector: 'app-host-setup',
@@ -10,68 +10,68 @@ import { TagSetup } from '../models/tag-setup';
 export class HostSetupComponent implements OnInit {
 
   @Output()
-  public hostsSetupChange: EventEmitter<Array<TagSetup>> = new EventEmitter<Array<TagSetup>>();
+  public hostsSetupChange: EventEmitter<Array<HostSetup>> = new EventEmitter<Array<HostSetup>>();
 
   public hostsSetupForm: FormGroup;
   public hide = true;
-  public isEditTags: boolean;
+  public isEditHostsSetup: boolean;
   public isEditHosts: boolean;
 
-  public tagsSetup: Array<TagSetup> = [];
+  public hostsSetup: Array<HostSetup> = [];
 
   constructor(private formBuilder: FormBuilder) { }
 
   public ngOnInit(): void {
     this.hostsSetupForm = this.formBuilder.group({
-      tags: this.formBuilder.array([])
+      hostsSetup: this.formBuilder.array([])
     });
   }
 
-  public onAddTagItem(): void {
-    const tagsControl = this.hostsSetupForm.controls.tags as FormArray;
-    tagsControl.push(this.createTagItem());
+  public onAddHostsSetupItem(): void {
+    const hostsSetupControl = this.hostsSetupForm.controls.hostsSetup as FormArray;
+    hostsSetupControl.push(this.createHostsSetupItem());
   }
 
-  public onCloseTag(): void {
-    if (this.hostsSetupForm.controls.tags) {
-      this.tagsSetup = this.hostsSetupForm.controls.tags.value;
+  public onCloseHostsSetup(): void {
+    if (this.hostsSetupForm.controls.hostsSetup) {
+      this.hostsSetup = this.hostsSetupForm.controls.hostsSetup.value;
     }
-    this.isEditTags = !this.isEditTags;
+    this.isEditHostsSetup = !this.isEditHostsSetup;
     this.onHostsSetupChange();
   }
 
-  public onDeleteTagItem(index: number): void {
-    const tagsControl = this.hostsSetupForm.controls.tags as FormArray;
-    tagsControl.removeAt(index);
-    this.tagsSetup.splice(index, 1);
+  public onDeleteHostsSetupItem(index: number): void {
+    const hostsSetupControl = this.hostsSetupForm.controls.hostsSetup as FormArray;
+    hostsSetupControl.removeAt(index);
+    this.hostsSetup.splice(index, 1);
   }
 
-  public onAddHostItem(index: number): void {
-    const hostsControl = (this.hostsSetupForm.controls.tags as FormArray).at(index).get('hosts') as FormArray;
+  public onAddHostsItem(index: number): void {
+    const hostsControl = (this.hostsSetupForm.controls.hostsSetup as FormArray).at(index).get('hosts') as FormArray;
     hostsControl.push(this.createHostItem());
   }
 
-  public onCloseHost(): void {
-    if (this.hostsSetupForm.controls.tags) {
-      this.tagsSetup = this.hostsSetupForm.controls.tags.value;
+  public onCloseHosts(): void {
+    if (this.hostsSetupForm.controls.hostsSetup) {
+      this.hostsSetup = this.hostsSetupForm.controls.hostsSetup.value;
     }
     this.isEditHosts = !this.isEditHosts;
     this.onHostsSetupChange();
   }
 
-  public onDeleteHostItem(index: number): void {
-    const hostsControl = (this.hostsSetupForm.controls.tags as FormArray).at(index).get('hosts') as FormArray;
+  public onDeleteHostsItem(index: number): void {
+    const hostsControl = (this.hostsSetupForm.controls.hostsSetup as FormArray).at(index).get('hosts') as FormArray;
     hostsControl.removeAt(index);
   }
 
   public onHostsSetupChange(): void {
-    const hostsSetup: Array<TagSetup> = this.hostsSetupForm.value;
+    const hostsSetup: Array<HostSetup> = this.hostsSetupForm.value.hostsSetup;
     this.hostsSetupChange.emit(hostsSetup);
   }
 
-  private createTagItem(): FormGroup {
+  private createHostsSetupItem(): FormGroup {
     return this.formBuilder.group({
-      name: '',
+      tagName: '',
       hosts: this.formBuilder.array([])
     });
   }

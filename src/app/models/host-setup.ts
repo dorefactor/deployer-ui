@@ -1,7 +1,8 @@
-import { TagSetup } from './tag-setup';
+import { TuplaThree } from './tupla-three';
 
 export class HostSetup {
 
-    public tags: Array<TagSetup>;
+    public tagName: string;
+    public hosts: Array<TuplaThree>;
 
 }

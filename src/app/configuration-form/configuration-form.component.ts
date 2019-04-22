@@ -3,7 +3,7 @@ import { KeyValuePair } from '../models/key-value-pair';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApplicationSetup } from '../models/application-setup';
 import { ApplicationSetupService } from '../services/application-setup.service';
-import { TagSetup } from '../models/tag-setup';
+import { HostSetup } from '../models/host-setup';
 
 @Component({
   selector: 'app-configuration-form',
@@ -16,7 +16,7 @@ export class ConfigurationFormComponent implements OnInit {
   public form: FormGroup;
   private environmentVariables: Array<KeyValuePair>;
   private ports: Array<KeyValuePair>;
-  private hostsSetup: Array<TagSetup>;
+  private hostsSetup: Array<HostSetup>;
 
   constructor(private formBuilder: FormBuilder,
               private applicationSetupService: ApplicationSetupService) { }
@@ -39,7 +39,7 @@ export class ConfigurationFormComponent implements OnInit {
     this.ports = ports;
   }
 
-  public onHostsSetupChange(hostsSetup: Array<TagSetup>) {
+  public onHostsSetupChange(hostsSetup: Array<HostSetup>) {
     this.hostsSetup = hostsSetup;
   }
 
