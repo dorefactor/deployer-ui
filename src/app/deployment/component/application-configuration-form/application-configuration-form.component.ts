@@ -3,7 +3,6 @@ import { KeyValuePair } from '../../../shared/model/key-value-pair';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApplicationSetup } from '../../model/application-setup';
 import { ApplicationSetupService } from '../../services/application-setup.service';
-import { HostSetup } from '../../model/host-setup';
 
 @Component({
   selector: 'app-application-configuration-form',
@@ -16,7 +15,6 @@ export class ApplicationConfigurationFormComponent implements OnInit {
   public form: FormGroup;
   private environmentVariables: Array<KeyValuePair>;
   private ports: Array<KeyValuePair>;
-  private hostsSetup: Array<HostSetup>;
 
   constructor(private formBuilder: FormBuilder,
               private applicationSetupService: ApplicationSetupService) { }
@@ -39,15 +37,10 @@ export class ApplicationConfigurationFormComponent implements OnInit {
     this.ports = ports;
   }
 
-  public onHostsSetupChange(hostsSetup: Array<HostSetup>) {
-    this.hostsSetup = hostsSetup;
-  }
-
   public onSubmit() {
     const applicationSetup: ApplicationSetup = this.form.value;
     applicationSetup.dockerSetup.environmentVariables = this.environmentVariables;
     applicationSetup.dockerSetup.ports = this.ports;
-    applicationSetup.hostsSetup = this.hostsSetup;
 
     this.applicationSetupService.saveApplicationSetup(applicationSetup).subscribe();
   }
