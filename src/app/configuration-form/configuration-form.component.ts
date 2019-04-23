@@ -49,8 +49,7 @@ export class ConfigurationFormComponent implements OnInit {
     applicationSetup.dockerSetup.ports = this.ports;
     applicationSetup.hostsSetup = this.hostsSetup;
 
-    console.log(JSON.stringify(applicationSetup));
-    // this.applicationSetupService.saveApplicationSetup(applicationSetup).subscribe();
+    this.applicationSetupService.saveApplicationSetup(applicationSetup).subscribe();
   }
 
 }
