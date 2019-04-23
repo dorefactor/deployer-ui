@@ -1,22 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { KeyValuePair } from '../models/key-value-pair';
+import { KeyValuePair } from '../../../shared/model/key-value-pair';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ApplicationSetup } from '../models/application-setup';
-import { ApplicationSetupService } from '../services/application-setup.service';
-import { HostSetup } from '../models/host-setup';
+import { ApplicationSetup } from '../../model/application-setup';
+import { ApplicationSetupService } from '../../services/application-setup.service';
+import { HostSetup } from '../../model/host-setup';
 
 @Component({
-  selector: 'app-configuration-form',
-  templateUrl: './configuration-form.component.html',
-  styleUrls: ['./configuration-form.component.sass']
+  selector: 'app-deployment-template-configuration-form',
+  templateUrl: './deployment-template-configuration-form.component.html',
+  styleUrls: ['./deployment-template-configuration-form.component.sass']
 })
-export class ConfigurationFormComponent implements OnInit {
+export class DeploymentTemplateConfigurationFormComponent implements OnInit {
 
+
+  public applicationsSetup: Array<ApplicationSetup>;
   public hide = true;
   public form: FormGroup;
   private environmentVariables: Array<KeyValuePair>;
   private ports: Array<KeyValuePair>;
   private hostsSetup: Array<HostSetup>;
+
 
   constructor(private formBuilder: FormBuilder,
               private applicationSetupService: ApplicationSetupService) { }
@@ -29,6 +32,13 @@ export class ConfigurationFormComponent implements OnInit {
         imageName: ''
       })
     });
+
+    this.applicationsSetup = new Array<ApplicationSetup>();
+    this.applicationsSetup.push(new ApplicationSetup('application 1'));
+    this.applicationsSetup.push(new ApplicationSetup('application 2'));
+    this.applicationsSetup.push(new ApplicationSetup('application 3'));
+    this.applicationsSetup.push(new ApplicationSetup('application 4'));
+    this.applicationsSetup.push(new ApplicationSetup('application 5'));
   }
 
   public onEnvironmentVariablesChange(environmentVariables: Array<KeyValuePair>) {

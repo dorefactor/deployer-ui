@@ -1,4 +1,4 @@
-import { KeyValuePair } from './key-value-pair';
+import { KeyValuePair } from '../../shared/model/key-value-pair';
 
 export class DockerSetup {
 

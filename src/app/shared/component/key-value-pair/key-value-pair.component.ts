@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { KeyValuePair } from '../models/key-value-pair';
+import { KeyValuePair } from '../../model/key-value-pair';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
