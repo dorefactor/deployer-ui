@@ -39,17 +39,17 @@ export class KeyValuePairComponent implements OnInit {
     this.keyValuePairsFormArray.push(this.createItem());
   }
 
+  public onDelete(index: number): void {
+    this.keyValuePairs.splice(index, 1);
+    this.keyValuePairsFormArray.removeAt(index);
+    this.onKeyValuePairsChange();
+  }
+
   public onClose(): void {
     if (this.keyValuePairsFormArray) {
       this.keyValuePairs = this.keyValuePairsFormArray.value;
     }
     this.isEdit = !this.isEdit;
-    this.onKeyValuePairsChange();
-  }
-
-  public onDelete(index: number): void {
-    this.keyValuePairs.splice(index, 1);
-    this.keyValuePairsFormArray.removeAt(index);
     this.onKeyValuePairsChange();
   }
 

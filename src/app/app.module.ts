@@ -12,6 +12,8 @@ import { AngularMaterialModule } from './angular-material/module/angular-materia
 import { KeyValuePairComponent } from './key-value-pair/key-value-pair.component';
 import { TuplaThreeComponent } from './tupla-three/tupla-three.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HostSetupComponent } from './host-setup/host-setup.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,15 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     ConfigurationFormComponent,
     KeyValuePairComponent,
-    TuplaThreeComponent
+    TuplaThreeComponent,
+    HostSetupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

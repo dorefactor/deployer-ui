@@ -1,10 +1,10 @@
-import { DockerSetup as DockerSetup } from './docker-setup';
-import { TuplaThree } from './tupla-three';
+import { DockerSetup } from './docker-setup';
+import { HostSetup } from './host-setup';
 
 export class ApplicationSetup {
 
     public name: string;
     public dockerSetup: DockerSetup;
-    public hosts: Array<TuplaThree>;
+    public hostsSetup: Array<HostSetup>;
 
 }
