@@ -7,4 +7,8 @@ export class ApplicationSetup {
     public dockerSetup: DockerSetup;
     public hostsSetup: Array<HostSetup>;
 
+    constructor(name: string) {
+        this.name = name;
+    }
+
 }

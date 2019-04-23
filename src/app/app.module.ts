@@ -14,6 +14,10 @@ import { TuplaThreeComponent } from './tupla-three/tupla-three.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HostSetupComponent } from './host-setup/host-setup.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DeploymentFormComponent } from './deployment-form/deployment-form.component';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -25,16 +29,25 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ConfigurationFormComponent,
     KeyValuePairComponent,
     TuplaThreeComponent,
-    HostSetupComponent
+    HostSetupComponent,
+    DeploymentFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularMaterialModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor() {
+    // Add an icon to the library for convenient access in other components
+    library.add(fas);
+  }
+
+}

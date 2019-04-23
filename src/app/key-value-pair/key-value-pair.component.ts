@@ -10,6 +10,18 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 export class KeyValuePairComponent implements OnInit {
 
   @Input()
+  public disabledKeyEdition = true;
+
+  @Input()
+  public disabledValueEdition = true;
+
+  @Input()
+  public showKeyInput = true;
+
+  @Input()
+  public showValueInput = true;
+
+  @Input()
   public title: string;
 
   @Input()
@@ -59,8 +71,8 @@ export class KeyValuePairComponent implements OnInit {
 
   private createItem(): FormGroup {
     return this.formBuilder.group({
-      key: '',
-      value: ''
+      key: [{ value: '', disabled: this.disabledKeyEdition }],
+      value: [{ value: '', disabled: this.disabledValueEdition }]
     });
   }
 

@@ -10,7 +10,7 @@
         <td>
           <div>
             <div (click)="onDeleteHostsSetupItem(i)" class="input-group-text icon__cursor-pointer icon__close">
-              <i class="fa fa-times-circle"></i>
+              <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
             </div>
             <div>
               <span>{{ hostSetup.tagName }}</span>
@@ -29,7 +29,7 @@
           <div class="row">
             <div class="col">
               <div (click)="onDeleteHostsSetupItem(hostSetupIndex)" class="icon">
-                <mat-icon class="fa fa-times-circle"></mat-icon>
+                <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
               </div>
               <div>
                 <mat-form-field>
@@ -62,7 +62,7 @@
                     <td>
                       <div>
                         <div (click)="onDeleteHostsItem(i)" class="input-group-text icon__cursor-pointer icon__close">
-                          <i class="fa fa-times-circle"></i>
+                          <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                         </div>
                         <div>
                           <span>{{ host.ip }}</span>
@@ -80,7 +80,7 @@
                       <div [formGroupName]="hostIndex" class="input-group">
                         <div class="input-group-prepend">
                           <div (click)="onDeleteHostsItem(hostIndex)" class="input-group-text icon__cursor-pointer">
-                            <i class="fa fa-times-circle"></i>
+                            <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                           </div>
                         </div>
                         <div class="row">
@@ -102,9 +102,8 @@
                                     [type]="hide ? 'password' : 'text'">
                                 </div>
                                 <div (click)="hide = !hide" class="password__icon">
-                                  <mat-icon matSuffix [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-eye'"
-                                    class="icon__cursor-pointer">
-                                  </mat-icon>
+                                  <fa-icon matSuffix [icon]="hide ? ['fa', 'eye-slash'] : ['fa', 'eye']"
+                                    class="icon__cursor-pointer"></fa-icon>
                                 </div>
                               </div>
                             </mat-form-field>
@@ -118,12 +117,12 @@
                       <div>
                         <div class="button__hosts--add">
                           <button mat-mini-fab color="primary" (click)="onAddHostsItem(hostSetupIndex)" type="button">
-                            <mat-icon class="fa fa-laptop-medical"></mat-icon>
+                            <fa-icon [icon]="['fa', 'laptop-medical']"></fa-icon>
                           </button>
                         </div>
                         <div class="button--check">
                           <button mat-mini-fab [color]="'success'" (click)="onCloseHosts()" type="button">
-                            <mat-icon class="fa fa-check"></mat-icon>
+                            <fa-icon [icon]="['fa', 'check']"></fa-icon>
                           </button>
                         </div>
                       </div>
@@ -144,12 +143,12 @@
     <div>
       <div class="button--add">
         <button mat-mini-fab color="accent" (click)="onAddHostsSetupItem()" type="button">
-          <mat-icon class="fa fa-plus-circle"></mat-icon>
+          <fa-icon [icon]="['fa', 'plus-circle']"></fa-icon>
         </button>
       </div>
       <div class="button--check">
         <button mat-mini-fab [color]="'success'" (click)="onCloseHostsSetup()" type="button">
-          <mat-icon class="fa fa-check"></mat-icon>
+          <fa-icon [icon]="['fa', 'check']"></fa-icon>
         </button>
       </div>
     </div>
