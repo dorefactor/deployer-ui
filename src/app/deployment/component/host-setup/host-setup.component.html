@@ -22,116 +22,118 @@
   </table>
   <!-- End Host Tags Summary -->
   <!-- Host Tags Edition -->
-  <div *ngIf="isEditHostsSetup" class="card-body">
-    <div formArrayName="hostsSetup">
-      <div *ngFor="let hostSetup of hostsSetupForm['controls'].hostsSetup['controls']; let hostSetupIndex = index;">
-        <div [formGroupName]="hostSetupIndex">
-          <div class="row">
-            <div class="col">
-              <div (click)="onDeleteHostsSetupItem(hostSetupIndex)" class="icon">
-                <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
-              </div>
-              <div>
-                <mat-form-field>
-                  <input matInput placeholder="Hosts Tag Name" formControlName="tagName">
-                </mat-form-field>
+  <div>
+    <div *ngIf="isEditHostsSetup" class="card-body">
+      <div formArrayName="hostsSetup">
+        <div *ngFor="let hostSetup of hostsSetupForm['controls'].hostsSetup['controls']; let hostSetupIndex = index;">
+          <div [formGroupName]="hostSetupIndex">
+            <div class="row">
+              <div class="col">
+                <div (click)="onDeleteHostsSetupItem(hostSetupIndex)" class="icon">
+                  <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Hosts Tag Name" formControlName="tagName">
+                  </mat-form-field>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <!-- Hosts Start -->
-              <table class="table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th>
-                      <div class="hosts-title__container">
-                        <div class="hosts-title__message">
-                          <span>Hosts</span>
+            <div class="row">
+              <div class="col">
+                <!-- Hosts Start -->
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>
+                        <div class="hosts-title__container">
+                          <div class="hosts-title__message">
+                            <span>Hosts</span>
+                          </div>
+                          <div (click)="onCloseHosts()" class="hosts-title__icon icon__cursor-pointer">
+                            <fa-icon [icon]="isEditHosts ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
+                          </div>
                         </div>
-                        <div (click)="onCloseHosts()" class="hosts-title__icon icon__cursor-pointer">
-                          <fa-icon [icon]="isEditHosts ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
-                        </div>
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
-                <!-- Hosts Summary -->
-                <tbody *ngIf="!isEditHosts && hostsSetup.length > 0">
-                  <tr *ngFor="let host of hostsSetup[hostSetupIndex].hosts; let i = index;">
-                    <td>
-                      <div>
-                        <div (click)="onDeleteHostsItem(i)" class="input-group-text icon__cursor-pointer icon__close">
-                          <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
-                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <!-- Hosts Summary -->
+                  <tbody *ngIf="!isEditHosts && hostsSetup.length > 0">
+                    <tr *ngFor="let host of hostsSetup[hostSetupIndex].hosts; let i = index;">
+                      <td>
                         <div>
-                          <span>{{ host.ip }}</span>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <!-- End Hosts Summary -->
-                <!-- Hosts Edition -->
-                <tbody *ngIf="isEditHosts">
-                  <tr formArrayName="hosts"
-                    *ngFor="let host of hostSetup['controls'].hosts['controls']; let hostIndex=index">
-                    <td>
-                      <div [formGroupName]="hostIndex" class="input-group">
-                        <div class="input-group-prepend">
-                          <div (click)="onDeleteHostsItem(hostIndex)" class="input-group-text icon__cursor-pointer">
+                          <div (click)="onDeleteHostsItem(i)" class="input-group-text icon__cursor-pointer icon__close">
                             <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                           </div>
+                          <div>
+                            <span>{{ host.ip }}</span>
+                          </div>
                         </div>
-                        <div class="row">
-                          <div class="col">
-                            <mat-form-field>
-                              <input matInput placeholder="IP Address" formControlName="ip">
-                            </mat-form-field>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <!-- End Hosts Summary -->
+                  <!-- Hosts Edition -->
+                  <tbody *ngIf="isEditHosts">
+                    <tr formArrayName="hosts"
+                      *ngFor="let host of hostSetup['controls'].hosts['controls']; let hostIndex=index">
+                      <td>
+                        <div [formGroupName]="hostIndex" class="input-group">
+                          <div class="input-group-prepend">
+                            <div (click)="onDeleteHostsItem(hostIndex)" class="input-group-text icon__cursor-pointer">
+                              <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
+                            </div>
                           </div>
-                          <div class="col">
-                            <mat-form-field>
-                              <input matInput placeholder="Username" formControlName="username">
-                            </mat-form-field>
-                          </div>
-                          <div class="col">
-                            <mat-form-field>
-                              <div class="password">
-                                <div class="password__input-text">
-                                  <input matInput placeholder="Password" formControlName="password"
-                                    [type]="hide ? 'password' : 'text'">
+                          <div class="row">
+                            <div class="col">
+                              <mat-form-field>
+                                <input matInput placeholder="IP Address" formControlName="ip">
+                              </mat-form-field>
+                            </div>
+                            <div class="col">
+                              <mat-form-field>
+                                <input matInput placeholder="Username" formControlName="username">
+                              </mat-form-field>
+                            </div>
+                            <div class="col">
+                              <mat-form-field>
+                                <div class="password">
+                                  <div class="password__input-text">
+                                    <input matInput placeholder="Password" formControlName="password"
+                                      [type]="hide ? 'password' : 'text'">
+                                  </div>
+                                  <div (click)="hide = !hide" class="password__icon">
+                                    <fa-icon matSuffix [icon]="hide ? ['fa', 'eye-slash'] : ['fa', 'eye']"
+                                      class="icon__cursor-pointer"></fa-icon>
+                                  </div>
                                 </div>
-                                <div (click)="hide = !hide" class="password__icon">
-                                  <fa-icon matSuffix [icon]="hide ? ['fa', 'eye-slash'] : ['fa', 'eye']"
-                                    class="icon__cursor-pointer"></fa-icon>
-                                </div>
-                              </div>
-                            </mat-form-field>
+                              </mat-form-field>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="actions">
-                      <div>
-                        <div class="button__hosts--add">
-                          <button mat-mini-fab color="primary" (click)="onAddHostsItem(hostSetupIndex)" type="button">
-                            <fa-icon [icon]="['fa', 'laptop-medical']"></fa-icon>
-                          </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="actions">
+                        <div>
+                          <div class="button__hosts--add">
+                            <button mat-mini-fab color="primary" (click)="onAddHostsItem(hostSetupIndex)" type="button">
+                              <fa-icon [icon]="['fa', 'laptop-medical']"></fa-icon>
+                            </button>
+                          </div>
+                          <div class="button--check">
+                            <button mat-mini-fab [color]="'success'" (click)="onCloseHosts()" type="button">
+                              <fa-icon [icon]="['fa', 'check']"></fa-icon>
+                            </button>
+                          </div>
                         </div>
-                        <div class="button--check">
-                          <button mat-mini-fab [color]="'success'" (click)="onCloseHosts()" type="button">
-                            <fa-icon [icon]="['fa', 'check']"></fa-icon>
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-                <!-- End Hosts Edition -->
-              </table>
-              <!-- Hosts End -->
+                      </td>
+                    </tr>
+                  </tbody>
+                  <!-- End Hosts Edition -->
+                </table>
+                <!-- Hosts End -->
+              </div>
             </div>
           </div>
         </div>
