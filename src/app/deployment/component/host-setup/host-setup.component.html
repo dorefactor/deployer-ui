@@ -8,11 +8,11 @@
     <tbody *ngIf="!isEditHostsSetup">
       <tr *ngFor="let hostSetup of hostsSetup; let i = index;">
         <td>
-          <div>
+          <div class="tag-summary__container">
             <div (click)="onDeleteHostsSetupItem(i)" class="input-group-text icon__cursor-pointer icon__close">
               <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
             </div>
-            <div>
+            <div class="tag-summary__legend">
               <span>{{ hostSetup.tagName }}</span>
             </div>
           </div>
@@ -61,11 +61,11 @@
                   <tbody *ngIf="!isEditHosts && hostsSetup.length > 0">
                     <tr *ngFor="let host of hostsSetup[hostSetupIndex].hosts; let i = index;">
                       <td>
-                        <div>
+                        <div class="host-summary__container">
                           <div (click)="onDeleteHostsItem(i)" class="input-group-text icon__cursor-pointer icon__close">
                             <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                           </div>
-                          <div>
+                          <div class="host-summary__legend">
                             <span>{{ host.ip }}</span>
                           </div>
                         </div>
