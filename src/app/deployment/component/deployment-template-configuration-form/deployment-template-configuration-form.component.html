@@ -1,0 +1,66 @@
+<div class="content">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="card__container">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          Setup
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput placeholder="Deployment Name" formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="form-group form__control">
+            <ng-select [items]="applicationsSetup" bindLabel="name" bindValue="id" placeholder="Applications"
+              (change)="onApplicationSetupChange($event)" formControlName="applicationId"></ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__container">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          Docker Setup
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <div>
+              <app-key-value-pair [title]="'Environemnt Variables'" [keyPlaceholder]="'Variable Name'"
+                [valuePlaceholder]="'Variable Value'" [disabledValueEdition]="false" [showDeleteOption]="false"
+                [keyValuePairs]="applicationSetup?.dockerSetup.environmentVariables" [editionMode]="true"
+                [canAddElement]="false" (keyValuePairsChange)="onEnvironmentVariablesChange($event)">
+              </app-key-value-pair>
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              <app-key-value-pair [title]="'Exposed Ports'" [keyPlaceholder]="'External Port'"
+                [valuePlaceholder]="'Internal Port'" [showDeleteOption]="false"
+                [keyValuePairs]="applicationSetup?.dockerSetup.ports" [canAddElement]="false" [canSaveElement]="false"
+                (keyValuePairsChange)="onPortsChange($event)">
+              </app-key-value-pair>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__container">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          Hosts Setup
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <app-host-setup (hostsSetupChange)="onHostsSetupChange($event)"></app-host-setup>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="actions-container">
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

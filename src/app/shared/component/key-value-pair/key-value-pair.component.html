@@ -19,8 +19,9 @@
       <tr *ngFor="let keyValuePair of keyValuePairs; let i = index">
         <td *ngIf="keyValuePair?.key">
           <div>
-            <div (click)="onDelete(i)" class="input-group-text icon__cursor-pointer icon__close">
-              <i class="fa fa-times-circle"></i>
+            <div *ngIf="showDeleteOption" (click)="onDelete(i)"
+              class="input-group-text icon__cursor-pointer icon__close">
+              <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
             </div>
             <div>
               <span>{{keyValuePair.key}}</span>
@@ -36,18 +37,18 @@
         *ngFor="let keyValuePair of form['controls'].keyValuePairs['controls']; let keyValuePairIndex = index;">
         <td>
           <div [formGroupName]="keyValuePairIndex" class="input-group">
-            <div class="input-group-prepend">
+            <div *ngIf="showDeleteOption" class="input-group-prepend">
               <div (click)="onDelete(keyValuePairIndex)" class="input-group-text icon__cursor-pointer">
-                <i class="fa fa-times-circle"></i>
+                <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
               </div>
             </div>
             <div class="row">
-              <div class="col">
+              <div *ngIf="showKeyInput" class="col">
                 <mat-form-field>
                   <input matInput placeholder="{{ keyPlaceholder }}" formControlName="key">
                 </mat-form-field>
               </div>
-              <div class="col">
+              <div *ngIf="showValueInput" class="col">
                 <mat-form-field>
                   <input matInput placeholder="{{ valuePlaceholder }}" formControlName="value">
                 </mat-form-field>
@@ -59,14 +60,14 @@
       <tr>
         <td class="actions">
           <div>
-            <div class="button__hosts--add">
+            <div *ngIf="canAddElement" class="button__hosts--add">
               <button mat-mini-fab color="primary" (click)="onAddItem()" type="button">
-                <mat-icon class="fa fa-plus-circle"></mat-icon>
+                <fa-icon [icon]="['fa', 'plus-circle']"></fa-icon>
               </button>
             </div>
-            <div class="button--check">
+            <div *ngIf="canSaveElement" class="button--check">
               <button mat-mini-fab [color]="'success'" (click)="onClose()" type="button">
-                <mat-icon class="fa fa-check"></mat-icon>
+                <fa-icon [icon]="['fa', 'check']"></fa-icon>
               </button>
             </div>
           </div>

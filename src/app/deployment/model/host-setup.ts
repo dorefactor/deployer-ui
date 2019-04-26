@@ -1,4 +1,4 @@
-import { TuplaThree } from './tupla-three';
+import { TuplaThree } from '../../shared/model/tupla-three';
 
 export class HostSetup {
 

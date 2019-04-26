@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,12 +6,12 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
-import { ConfigurationFormComponent } from './configuration-form/configuration-form.component';
 import { AngularMaterialModule } from './angular-material/module/angular-material.module';
-import { KeyValuePairComponent } from './key-value-pair/key-value-pair.component';
-import { TuplaThreeComponent } from './tupla-three/tupla-three.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HostSetupComponent } from './host-setup/host-setup.component';
+import { SharedModule } from './shared/module/shared.module';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { DeploymentModule } from './deployment/module/deployment.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
@@ -21,20 +20,24 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     HomeComponent,
     SidebarComponent,
-    FooterComponent,
-    ConfigurationFormComponent,
-    KeyValuePairComponent,
-    TuplaThreeComponent,
-    HostSetupComponent
+    FooterComponent
   ],
   imports: [
-    BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     AngularMaterialModule,
-    HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedModule,
+    DeploymentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor() {
+    // Add an icon to the library for convenient access in other components
+    library.add(fas);
+  }
+
+}

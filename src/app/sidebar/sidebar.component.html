@@ -4,11 +4,33 @@
             <h3></h3>
         </div>
         <div class="menu__items">
-            <div class="items__item">
-                <a [routerLink]="['/configuration']"><span class="item__icon"><i class="fa fa-cogs"></i></span>Application Configuration</a>
+            <div class="item">
+                <div class="item__legend">
+                    <fa-icon [icon]="['fa', 'cogs']" class="item__icon"></fa-icon>
+                    <span>Configuration</span>
+                </div>
+                <div class="subitems">
+                    <div class="subitems__item">
+                        <a [routerLink]="['/configuration/applications']">
+                            <fa-icon [icon]="['fas', 'stream']" class="item__icon"></fa-icon>
+                            <span>Application Configuration</span>
+                        </a>
+                    </div>
+                    <div class="subitems__item">
+                        <a [routerLink]="['configuration/deployment-templates']">
+                            <fa-icon [icon]="['fa', 'copy']" class="item__icon"></fa-icon>
+                            <span>Deployment</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="items__item">
-                <a href="#"><span class="item__icon"><i class="fa fa-rocket"></i></span>Deployment</a>
+            <div class="item">
+                <div class="item__legend">
+                    <a [routerLink]="['/configuration/applications']">
+                        <fa-icon [icon]="['fas', 'rocket']" class="item__icon"></fa-icon>
+                        <span>Deployment</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

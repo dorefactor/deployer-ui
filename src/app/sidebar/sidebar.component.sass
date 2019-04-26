@@ -5,7 +5,6 @@ a
     text-decoration: none
     color: white
     display: block
-    padding: 1em
 
 .menu
     position: relative
@@ -15,17 +14,31 @@ a
     padding: 0.5em
     color: white
 
-.items__item
-    width: 100%
+.item
+    color: white
 
-.items__item,
-.items__item a
+.item__legend
+    padding: 0.5em
+    width: 100%
     &:hover
-        background-color: #3F0260
         color: white
         font-weight: bold
 
-// .item__icon
-//     padding: 0 0.5em
 .item__icon
     padding: 0 0.5em 0 0
+
+.item > .item__legend  + .subitems
+    display: none
+
+.item > .item__legend  + .subitems
+.item > .item__legend:hover  + .subitems,
+.item > .item__legend  + .subitems:hover
+    display: block
+
+.subitems__item
+    padding-top: 0.5em
+    padding-bottom: 0.5em
+    padding-left: 1.5em
+    &:hover
+        color: white
+        font-weight: bold

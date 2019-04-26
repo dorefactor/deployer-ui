@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ConfigurationFormComponent } from './configuration-form/configuration-form.component';
+import { HomeComponent } from './home/home.component';
 
-const routes: Routes = [
+const ROUTES: Routes = [
   {
-    path: 'configuration', component: ConfigurationFormComponent
+    path: '', component: HomeComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(ROUTES)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { HostSetup } from '../models/host-setup';
+import { HostSetup } from '../../model/host-setup';
 
 @Component({
   selector: 'app-host-setup',

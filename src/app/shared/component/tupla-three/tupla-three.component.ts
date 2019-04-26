@@ -1,7 +1,6 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { KeyValuePair } from '../models/key-value-pair';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { TuplaThree } from '../models/tupla-three';
+import { TuplaThree } from '../../model/tupla-three';
 
 @Component({
   selector: 'app-tupla-three',
