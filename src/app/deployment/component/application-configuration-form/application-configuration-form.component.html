@@ -1,50 +1,54 @@
 <div class="content">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="card">
-      <div class="card-header bg-secondary text-white">
-        Setup
-      </div>
-      <div class="card-body">
-        <div class="form-group">
-          <mat-form-field>
-            <input matInput formControlName="name" placeholder="Store As">
-          </mat-form-field>
+    <div class="card__container">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          Setup
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput formControlName="name" placeholder="Store As">
+            </mat-form-field>
+          </div>
         </div>
       </div>
     </div>
-    <div formGroupName="dockerSetup" class="card">
-      <div class="card-header bg-secondary text-white">
-        Docker Setup
-      </div>
-      <div class="card-body">
-        <div class="form-group">
-          <div class="row">
-            <div class="col">
-              <mat-form-field>
-                <input matInput formControlName="registryUrl" placeholder="Registry Url">
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-form-field>
-                <input matInput formControlName="imageName" placeholder="Image">
-              </mat-form-field>
+    <div class="card__container">
+      <div formGroupName="dockerSetup" class="card">
+        <div class="card-header bg-secondary text-white">
+          Docker Setup
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <mat-form-field>
+                  <input matInput formControlName="registryUrl" placeholder="Registry Url">
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <input matInput formControlName="imageName" placeholder="Image">
+                </mat-form-field>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div>
-            <app-key-value-pair [title]="'Environemnt Variables'" [keyPlaceholder]="'Variable Name'"
-              [valuePlaceholder]="'Variable Value'" [disabledKeyEdition]="false" [showValueInput]="false"
-              (keyValuePairsChange)="onEnvironmentVariablesChange($event)">
-            </app-key-value-pair>
+          <div class="form-group">
+            <div>
+              <app-key-value-pair [title]="'Environemnt Variables'" [keyPlaceholder]="'Variable Name'"
+                [valuePlaceholder]="'Variable Value'" [disabledKeyEdition]="false" [showValueInput]="false"
+                (keyValuePairsChange)="onEnvironmentVariablesChange($event)">
+              </app-key-value-pair>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div>
-            <app-key-value-pair [title]="'Exposed Ports'" [keyPlaceholder]="'External Port'"
-              [valuePlaceholder]="'Internal Port'" [disabledKeyEdition]="false" [disabledValueEdition]="false"
-              (keyValuePairsChange)="onPortsChange($event)">
-            </app-key-value-pair>
+          <div class="form-group">
+            <div>
+              <app-key-value-pair [title]="'Exposed Ports'" [keyPlaceholder]="'External Port'"
+                [valuePlaceholder]="'Internal Port'" [disabledKeyEdition]="false" [disabledValueEdition]="false"
+                (keyValuePairsChange)="onPortsChange($event)">
+              </app-key-value-pair>
+            </div>
           </div>
         </div>
       </div>

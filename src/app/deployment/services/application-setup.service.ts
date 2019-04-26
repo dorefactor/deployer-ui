@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApplicationSetupService {
 
-  private APPLICATION_SETUP_RESOURCE = `${environment.domain}/application`;
+  private APPLICATION_SETUP_RESOURCE_URI = `${environment.domain}/configuration/applications`;
 
   constructor(private httpClient: HttpClient) {
   }
@@ -20,8 +20,16 @@ export class ApplicationSetupService {
         'Content-Type': 'application/json'
       })
     };
-    return this.httpClient.post<ApplicationSetup>(this.APPLICATION_SETUP_RESOURCE,
+    return this.httpClient.post<ApplicationSetup>(this.APPLICATION_SETUP_RESOURCE_URI,
       JSON.stringify(applicationSetup), httpOptions);
+  }
+
+  public getApplications(): Observable<ApplicationSetup[]> {
+    return this.httpClient.get<ApplicationSetup[]>(this.APPLICATION_SETUP_RESOURCE_URI);
+  }
+
+  public getApplicationById(id: string): Observable<ApplicationSetup> {
+    return this.httpClient.get<ApplicationSetup>(this.APPLICATION_SETUP_RESOURCE_URI);
   }
 
 }

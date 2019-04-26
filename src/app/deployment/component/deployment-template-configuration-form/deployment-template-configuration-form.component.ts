@@ -12,14 +12,14 @@ import { HostSetup } from '../../model/host-setup';
 })
 export class DeploymentTemplateConfigurationFormComponent implements OnInit {
 
-
-  public applicationsSetup: Array<ApplicationSetup>;
   public hide = true;
   public form: FormGroup;
   private environmentVariables: Array<KeyValuePair>;
   private ports: Array<KeyValuePair>;
   private hostsSetup: Array<HostSetup>;
 
+  public applicationsSetup: Array<ApplicationSetup>;
+  public applicationSetup: ApplicationSetup;
 
   constructor(private formBuilder: FormBuilder,
               private applicationSetupService: ApplicationSetupService) { }
@@ -29,16 +29,21 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
       name: '',
       dockerSetup: this.formBuilder.group({
         registryUrl: '',
-        imageName: ''
+        imageName: '',
+        environmentVariables: this.formBuilder.array([])
       })
     });
 
-    this.applicationsSetup = new Array<ApplicationSetup>();
-    this.applicationsSetup.push(new ApplicationSetup('application 1'));
-    this.applicationsSetup.push(new ApplicationSetup('application 2'));
-    this.applicationsSetup.push(new ApplicationSetup('application 3'));
-    this.applicationsSetup.push(new ApplicationSetup('application 4'));
-    this.applicationsSetup.push(new ApplicationSetup('application 5'));
+    this.applicationSetupService.getApplications().subscribe(applicationsSetup => this.applicationsSetup = applicationsSetup);
+  }
+
+  public onApplicationSetupChange(applicationSetupSelected: ApplicationSetup) {
+    this.applicationSetup = this.applicationsSetup.find(applicationSetup => applicationSetup.id === applicationSetupSelected.id);
+    if (this.applicationSetup) {
+      this.environmentVariables = this.applicationSetup.dockerSetup.environmentVariables;
+      this.ports = this.applicationSetup.dockerSetup.ports;
+      this.hostsSetup = this.applicationSetup.hostsSetup;
+    }
   }
 
   public onEnvironmentVariablesChange(environmentVariables: Array<KeyValuePair>) {
