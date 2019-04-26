@@ -82,11 +82,7 @@ export class KeyValuePairComponent implements OnInit, OnChanges {
 
   public onClose(): void {
     if (this.keyValuePairsFormArray && this.keyValuePairsFormArray.length > 0) {
-      if (!this.editionMode) {
-        this.keyValuePairs = this.keyValuePairsFormArray.value;
-      } else {
-        this.keyValuePairs.push(this.keyValuePairsFormArray.value);
-      }
+      this.keyValuePairs = this.keyValuePairsFormArray.getRawValue();
     }
 
     this.isEdit = !this.isEdit;
