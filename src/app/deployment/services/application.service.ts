@@ -4,10 +4,8 @@ import { ApplicationSetup } from '../model/application-setup';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ApplicationSetupService {
+@Injectable()
+export class ApplicationService {
 
   private APPLICATION_SETUP_RESOURCE_URI = `${environment.domain}/configuration/applications`;
 
