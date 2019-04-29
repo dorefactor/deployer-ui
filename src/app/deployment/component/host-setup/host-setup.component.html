@@ -112,7 +112,7 @@
                             <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                           </div>
                           <div class="host-summary__legend">
-                            <span>{{ host.ip }} = sdg</span>
+                            <span>{{ host.ip }}</span>
                           </div>
                         </div>
                       </td>
@@ -126,7 +126,7 @@
                       <td>
                         <div [formGroupName]="hostIndex" class="input-group">
                           <div class="input-group-prepend">
-                            <div (click)="onDeleteHostsItem(hostIndex)" class="input-group-text icon__cursor-pointer">
+                            <div (click)="onDeleteHostsItem(hostSetupIndex, hostIndex)" class="input-group-text icon__cursor-pointer">
                               <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                             </div>
                           </div>
