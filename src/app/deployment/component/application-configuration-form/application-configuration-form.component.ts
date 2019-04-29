@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeyValuePair } from '../../../shared/model/key-value-pair';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApplicationSetup } from '../../model/application-setup';
-import { ApplicationSetupService } from '../../services/application-setup.service';
+import { ApplicationService } from '../../services/application.service';
 
 @Component({
   selector: 'app-application-configuration-form',
@@ -17,7 +17,7 @@ export class ApplicationConfigurationFormComponent implements OnInit {
   private ports: Array<KeyValuePair>;
 
   constructor(private formBuilder: FormBuilder,
-              private applicationSetupService: ApplicationSetupService) { }
+              private applicationService: ApplicationService) { }
 
   public ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -42,7 +42,7 @@ export class ApplicationConfigurationFormComponent implements OnInit {
     applicationSetup.dockerSetup.environmentVariables = this.environmentVariables;
     applicationSetup.dockerSetup.ports = this.ports;
 
-    this.applicationSetupService.saveApplicationSetup(applicationSetup).subscribe();
+    this.applicationService.saveApplicationSetup(applicationSetup).subscribe();
   }
 
 }

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { KeyValuePair } from '../../../shared/model/key-value-pair';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApplicationSetup } from '../../model/application-setup';
-import { ApplicationSetupService } from '../../services/application-setup.service';
+import { ApplicationService } from '../../services/application.service';
 import { HostSetup } from '../../model/host-setup';
 import { DeploymentTemplateSetup } from '../../model/deployment-template-setup';
-import { DeploymentTemplateSetupService } from '../../services/deployment-template-setup.service';
+import { DeploymentService } from '../../services/deployment.service';
 
 @Component({
   selector: 'app-deployment-template-configuration-form',
@@ -16,7 +16,6 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
 
   public hide = true;
   public form: FormGroup;
-  public deploymentTemplatesSetup: Array<DeploymentTemplateSetup>;
   public applicationsSetup: Array<ApplicationSetup>;
   public applicationSetup: ApplicationSetup;
 
@@ -25,8 +24,8 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
   private hostsSetup: Array<HostSetup>;
 
   constructor(private formBuilder: FormBuilder,
-              private applicationSetupService: ApplicationSetupService,
-              private deploymentTemplateSetupService: DeploymentTemplateSetupService) { }
+              private applicationSetupService: ApplicationService,
+              private deploymentTemplateService: DeploymentService) { }
 
   public ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -68,9 +67,7 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
     deploymentTemplateSetup.ports = this.ports;
     deploymentTemplateSetup.hostsSetup = this.hostsSetup;
 
-    console.log(JSON.stringify(deploymentTemplateSetup));
-
-    this.deploymentTemplateSetupService.saveDeploymentTemplateSetup(deploymentTemplateSetup).subscribe();
+    this.deploymentTemplateService.saveDeploymentTemplateSetup(deploymentTemplateSetup).subscribe();
   }
 
 }

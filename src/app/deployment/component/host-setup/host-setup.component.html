@@ -1,35 +1,79 @@
-<div class="card" [formGroup]="hostsSetupForm">
+<div class="card" [formGroup]="form">
   <div (click)="onCloseHostsSetup()" class="card-header bg-info text-white icon__cursor-pointer">
     <span class="title">Host Tags</span>
-    <fa-icon [icon]="isEditHostsSetup ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
+    <fa-icon *ngIf="editionMode" [icon]="isEditHostsSetup ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
   </div>
-  <!-- Host Tags Summary -->
-  <table class="table table-striped table-bordered host_tags__summary">
+  <!-- Host tags summary -->
+  <table class="table table-bordered host_tags__summary">
     <tbody *ngIf="!isEditHostsSetup">
-      <tr *ngFor="let hostSetup of hostsSetup; let i = index;">
+      <tr *ngFor="let hostSetup of hostsSetup; let hostSetupIndex = index;"
+        [ngClass]="!hostSetup.selected ? 'unselected' : ''">
         <td>
           <div class="tag-summary__container">
-            <div (click)="onDeleteHostsSetupItem(i)" class="input-group-text icon__cursor-pointer icon__close">
+            <div *ngIf="editionMode" (click)="onDeleteHostsSetupItem(hostSetupIndex)"
+              class="input-group-text icon__cursor-pointer icon__close">
               <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
             </div>
+            <!-- No edition mode -->
+            <section *ngIf="!editionMode" class="input-group-text icon__close">
+              <mat-checkbox (change)="onSelectHostsSetupItem(hostSetupIndex)" [indeterminate]="false"
+                [checked]="hostSetup.selected"></mat-checkbox>
+            </section>
+            <!-- End no edition mode -->
             <div class="tag-summary__legend">
               <span>{{ hostSetup.tagName }}</span>
             </div>
+            <!-- No edition mode -->
+            <div *ngIf="!editionMode">
+              <table *ngIf="hostSetup.selected" class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>
+                      <div class="hosts-title__container">
+                        <div class="hosts-title__message">
+                          <span>Hosts</span>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <!-- No edition mode hosts summary -->
+                <tbody>
+                  <tr *ngFor="let host of hostSetup.hosts; let hostIndex = index;"
+                    [ngClass]="!host.selected ? 'unselected' : ''">
+                    <td>
+                      <div class="host-summary__container">
+                        <section class="input-group-text icon__close">
+                          <mat-checkbox (change)="onSelectHostItem(hostSetupIndex, hostIndex)"
+                            [checked]="host?.selected"></mat-checkbox>
+                        </section>
+                        <div class="host-summary__legend">
+                          <span>{{ host.ip }}</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <!-- End no edition mode hosts summary -->
+              </table>
+            </div>
+            <!-- End no edition mode -->
           </div>
         </td>
       </tr>
     </tbody>
   </table>
-  <!-- End Host Tags Summary -->
-  <!-- Host Tags Edition -->
+  <!-- End host tags summary -->
+  <!-- Host tags edition -->
   <div>
     <div *ngIf="isEditHostsSetup" class="card-body">
+      <!-- <div class="card-body"> -->
       <div formArrayName="hostsSetup">
-        <div *ngFor="let hostSetup of hostsSetupForm['controls'].hostsSetup['controls']; let hostSetupIndex = index;">
+        <div *ngFor="let hostSetup of form['controls'].hostsSetup['controls']; let hostSetupIndex = index;">
           <div [formGroupName]="hostSetupIndex">
             <div class="row">
               <div class="col">
-                <div (click)="onDeleteHostsSetupItem(hostSetupIndex)" class="icon">
+                <div *ngIf="editionMode" (click)="onDeleteHostsSetupItem(hostSetupIndex)" class="icon">
                   <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                 </div>
                 <div>
@@ -41,8 +85,8 @@
             </div>
             <div class="row">
               <div class="col">
-                <!-- Hosts Start -->
-                <table class="table table-striped table-bordered">
+                <!-- Hosts start -->
+                <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th>
@@ -50,19 +94,21 @@
                           <div class="hosts-title__message">
                             <span>Hosts</span>
                           </div>
-                          <div (click)="onCloseHosts()" class="hosts-title__icon icon__cursor-pointer">
+                          <div *ngIf="editionMode" (click)="onCloseHosts()"
+                            class="hosts-title__icon icon__cursor-pointer">
                             <fa-icon [icon]="isEditHosts ? ['fa', 'times-circle'] : ['fa', 'pencil-alt']"></fa-icon>
                           </div>
                         </div>
                       </th>
                     </tr>
                   </thead>
-                  <!-- Hosts Summary -->
+                  <!-- Hosts summary -->
                   <tbody *ngIf="!isEditHosts && hostsSetup.length > 0">
-                    <tr *ngFor="let host of hostsSetup[hostSetupIndex].hosts; let i = index;">
+                    <tr *ngFor="let host of hostsSetup[hostSetupIndex]?.hosts; let hostIndex = index;">
                       <td>
                         <div class="host-summary__container">
-                          <div (click)="onDeleteHostsItem(i)" class="input-group-text icon__cursor-pointer icon__close">
+                          <div (click)="onDeleteHostsItem(hostSetupIndex, hostIndex)"
+                            class="input-group-text icon__cursor-pointer icon__close">
                             <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                           </div>
                           <div class="host-summary__legend">
@@ -72,15 +118,15 @@
                       </td>
                     </tr>
                   </tbody>
-                  <!-- End Hosts Summary -->
-                  <!-- Hosts Edition -->
+                  <!-- End hosts summary -->
+                  <!-- Hosts edition -->
                   <tbody *ngIf="isEditHosts">
                     <tr formArrayName="hosts"
-                      *ngFor="let host of hostSetup['controls'].hosts['controls']; let hostIndex=index">
+                      *ngFor="let host of hostSetup['controls'].hosts['controls']; let hostIndex = index">
                       <td>
                         <div [formGroupName]="hostIndex" class="input-group">
                           <div class="input-group-prepend">
-                            <div (click)="onDeleteHostsItem(hostIndex)" class="input-group-text icon__cursor-pointer">
+                            <div (click)="onDeleteHostsItem(hostSetupIndex, hostIndex)" class="input-group-text icon__cursor-pointer">
                               <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                             </div>
                           </div>
@@ -130,9 +176,9 @@
                       </td>
                     </tr>
                   </tbody>
-                  <!-- End Hosts Edition -->
+                  <!-- End hosts edition -->
                 </table>
-                <!-- Hosts End -->
+                <!-- Hosts end -->
               </div>
             </div>
           </div>
@@ -140,7 +186,7 @@
       </div>
     </div>
   </div>
-  <!-- End Host Tags Edition -->
+  <!-- End host tags edition -->
   <div *ngIf="isEditHostsSetup" class="card-footer text-muted">
     <div>
       <div class="button--add">

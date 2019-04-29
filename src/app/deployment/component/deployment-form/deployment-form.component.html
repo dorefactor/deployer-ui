@@ -1,0 +1,41 @@
+<div class="content">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="card__container">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          <span>Setup</span>
+        </div>
+        <div class="card-body">
+          <div class="form-group form__control">
+            <ng-select [items]="deploymentTemplatesSetup" bindLabel="name" bindValue="id"
+              (change)="onDeploymentTemplateSetupChange($event)" placeholder="Deployment Templates"
+              formControlName="deploymentTemplateId"></ng-select>
+          </div>
+          <div class="form-group form__control">
+            <mat-form-field>
+              <input matInput placeholder="Version to be Deployed" formControlName="version">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__container">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          <span>Hosts Setup</span>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <app-host-setup [editionMode]="false" [hostsSetup]="hostsSetup"
+              (hostsSetupChange)="onHostsSetupChange($event)"></app-host-setup>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="actions-container">
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit">Deploy</button>
+      </div>
+    </div>
+  </form>
+</div>

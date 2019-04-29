@@ -7,12 +7,16 @@ import { HostSetupComponent } from '../component/host-setup/host-setup.component
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from 'src/app/shared/module/shared.module';
+import { DeploymentFormComponent } from '../component/deployment-form/deployment-form.component';
+import { DeploymentService } from '../services/deployment.service';
+import { ApplicationService } from '../services/application.service';
 
 @NgModule({
   declarations: [
     ApplicationConfigurationFormComponent,
     DeploymentTemplateConfigurationFormComponent,
-    HostSetupComponent
+    HostSetupComponent,
+    DeploymentFormComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -20,6 +24,7 @@ import { SharedModule } from 'src/app/shared/module/shared.module';
     NgSelectModule,
     SharedModule,
     DeploymentRoutingModule
-  ]
+  ],
+  providers: [ApplicationService, DeploymentService]
 })
 export class DeploymentModule { }
