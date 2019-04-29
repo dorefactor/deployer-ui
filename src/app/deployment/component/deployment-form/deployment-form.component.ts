@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { HostSetup } from '../../model/host-setup';
 import { DeploymentTemplateSetup } from '../../model/deployment-template-setup';
 import { DeploymentService as DeploymentService } from '../../services/deployment.service';
+import { Deployment } from '../../model/deployment';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-deployment-form',
@@ -15,8 +17,7 @@ export class DeploymentFormComponent implements OnInit {
   public form: FormGroup;
   public deploymentTemplatesSetup: Array<DeploymentTemplateSetup>;
   public deploymentTemplateSetup: DeploymentTemplateSetup;
-
-  private hostsSetup: Array<HostSetup>;
+  public hostsSetup: Array<HostSetup>;
 
   constructor(private formBuilder: FormBuilder,
               private deploymentService: DeploymentService) { }
@@ -37,19 +38,31 @@ export class DeploymentFormComponent implements OnInit {
     }
   }
 
+  public onHostsSetupChange(hostsSetup: Array<HostSetup>) {
+    this.hostsSetup = hostsSetup;
+  }
+
   public onSubmit() {
-    // const form = this.form.value;
+    const form = this.form.value;
 
-    // const deploymentTemplateSetup = new DeploymentTemplateSetup();
-    // deploymentTemplateSetup.name = form.name;
-    // deploymentTemplateSetup.applicationId = form.applicationId;
-    // deploymentTemplateSetup.environmentVariables = this.environmentVariables;
-    // deploymentTemplateSetup.ports = this.ports;
-    // deploymentTemplateSetup.hostsSetup = this.hostsSetup;
+    const deployment = new Deployment();
+    deployment.deploymentTemplateId = form.deploymentTemplateId;
+    deployment.version = form.version;
+    deployment.hosts = this.getOnlyHostsSetupWithHostsSelected();
 
-    // console.log(JSON.stringify(deploymentTemplateSetup));
+    this.deploymentService.createDeploymentOrder(deployment).subscribe();
+  }
 
-    // this.deploymentService.saveDeploymentTemplateSetup(deploymentTemplateSetup).subscribe();
+  private getOnlyHostsSetupWithHostsSelected(): HostSetup[] {
+    // Clone 'hostsSetup' to filter only those are 'selected'
+    const hostsSetupCloned = _.cloneDeep(this.hostsSetup.filter(hostSetup =>
+      hostSetup.hasOwnProperty('selected') && hostSetup.selected));
+
+    return hostsSetupCloned.filter(hostSetup => {
+      // Remove hosts not 'selected'
+      hostSetup.hosts = hostSetup.hosts.filter(host => host.hasOwnProperty('selected') && host.selected);
+      return hostSetup.hosts.length > 0;
+    });
   }
 
 }

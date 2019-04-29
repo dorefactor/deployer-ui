@@ -67,8 +67,6 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
     deploymentTemplateSetup.ports = this.ports;
     deploymentTemplateSetup.hostsSetup = this.hostsSetup;
 
-    console.log(JSON.stringify(deploymentTemplateSetup));
-
     this.deploymentTemplateService.saveDeploymentTemplateSetup(deploymentTemplateSetup).subscribe();
   }
 

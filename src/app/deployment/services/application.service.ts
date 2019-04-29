@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ApplicationSetup } from '../model/application-setup';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,13 +13,8 @@ export class ApplicationService {
   }
 
   public saveApplicationSetup(applicationSetup: ApplicationSetup): Observable<ApplicationSetup> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
     return this.httpClient.post<ApplicationSetup>(this.APPLICATION_SETUP_RESOURCE_URI,
-      JSON.stringify(applicationSetup), httpOptions);
+      JSON.stringify(applicationSetup));
   }
 
   public getApplications(): Observable<ApplicationSetup[]> {
@@ -27,7 +22,7 @@ export class ApplicationService {
   }
 
   public getApplicationById(id: string): Observable<ApplicationSetup> {
-    return this.httpClient.get<ApplicationSetup>(this.APPLICATION_SETUP_RESOURCE_URI);
+    return this.httpClient.get<ApplicationSetup>(this.APPLICATION_SETUP_RESOURCE_URI + `/${id}`);
   }
 
 }
