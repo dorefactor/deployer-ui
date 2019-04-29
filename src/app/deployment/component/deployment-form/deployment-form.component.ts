@@ -32,9 +32,13 @@ export class DeploymentFormComponent implements OnInit {
   }
 
   public onDeploymentTemplateSetupChange(deploymentTemplateSetupSelected: DeploymentTemplateSetup) {
-    this.deploymentTemplateSetup = this.deploymentTemplatesSetup.find(deploymentTemplateSetup => deploymentTemplateSetup.id === deploymentTemplateSetupSelected.id);
-    if (this.deploymentTemplateSetup) {
-      this.hostsSetup = this.deploymentTemplateSetup.hostsSetup;
+    if (deploymentTemplateSetupSelected) {
+      this.deploymentTemplateSetup = this.deploymentTemplatesSetup.find(deploymentTemplateSetup => deploymentTemplateSetup.id === deploymentTemplateSetupSelected.id);
+      if (this.deploymentTemplateSetup) {
+        this.hostsSetup = this.deploymentTemplateSetup.hostsSetup;
+      }
+    } else {
+      this.hostsSetup = [];
     }
   }
 
