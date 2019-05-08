@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApplicationSetup } from '../model/application-setup';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Application } from '../model/application';
 
 @Injectable()
 export class ApplicationService {
@@ -12,9 +13,9 @@ export class ApplicationService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public saveApplicationSetup(applicationSetup: ApplicationSetup): Observable<ApplicationSetup> {
-    return this.httpClient.post<ApplicationSetup>(this.APPLICATION_SETUP_RESOURCE_URI,
-      JSON.stringify(applicationSetup));
+  public save(application: Application): Observable<Application> {
+    return this.httpClient.post<Application>(this.APPLICATION_SETUP_RESOURCE_URI,
+      JSON.stringify(application));
   }
 
   public getApplications(): Observable<ApplicationSetup[]> {

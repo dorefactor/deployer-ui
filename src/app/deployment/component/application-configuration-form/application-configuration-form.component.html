@@ -15,21 +15,21 @@
       </div>
     </div>
     <div class="card__container">
-      <div formGroupName="dockerSetup" class="card">
+      <div formGroupName="applicationSetup" class="card">
         <div class="card-header bg-secondary text-white">
           Docker Setup
         </div>
         <div class="card-body">
           <div class="form-group">
             <div class="row">
-              <div class="col">
+              <div formGroupName="registry" class="col">
                 <mat-form-field>
-                  <input matInput formControlName="registryUrl" placeholder="Registry Url">
+                  <input matInput formControlName="url" placeholder="Registry Url">
                 </mat-form-field>
               </div>
-              <div class="col">
+              <div formGroupName="image" class="col">
                 <mat-form-field>
-                  <input matInput formControlName="imageName" placeholder="Image">
+                  <input matInput formControlName="name" placeholder="Image">
                 </mat-form-field>
               </div>
             </div>

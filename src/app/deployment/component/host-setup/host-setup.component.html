@@ -21,7 +21,7 @@
             </section>
             <!-- End no edition mode -->
             <div class="tag-summary__legend">
-              <span>{{ hostSetup.tagName }}</span>
+              <span>{{ hostSetup.tag }}</span>
             </div>
             <!-- No edition mode -->
             <div *ngIf="!editionMode">
@@ -126,7 +126,8 @@
                       <td>
                         <div [formGroupName]="hostIndex" class="input-group">
                           <div class="input-group-prepend">
-                            <div (click)="onDeleteHostsItem(hostSetupIndex, hostIndex)" class="input-group-text icon__cursor-pointer">
+                            <div (click)="onDeleteHostsItem(hostSetupIndex, hostIndex)"
+                              class="input-group-text icon__cursor-pointer">
                               <fa-icon [icon]="['fa', 'times-circle']"></fa-icon>
                             </div>
                           </div>
