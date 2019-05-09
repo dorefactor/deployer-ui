@@ -40,22 +40,20 @@ export class DeploymentFormComponent implements OnInit {
       });
   }
 
-  public onDeploymentTemplateChange(deploymentTemplateSelected: DeploymentTemplate) {
+  public onDeploymentTemplateChange(deploymentTemplateSelected: DeploymentTemplate): void {
     if (deploymentTemplateSelected) {
-      this.deploymentService.getDeploymentTemplateById(deploymentTemplateSelected.id)
-        .subscribe(deploymentTemplate => {
-          this.hostsSetup = deploymentTemplate.hostsSetup;
-        });
+      this.deploymentTemplate = this.deploymentTemplates.find(deploymentTemplate => deploymentTemplate.id === deploymentTemplateSelected.id);
+      this.hostsSetup = this.deploymentTemplate.hostsSetup;
     } else {
       this.hostsSetup = [];
     }
   }
 
-  public onHostsSetupChange(hostsSetup: Array<HostSetup>) {
+  public onHostsSetupChange(hostsSetup: Array<HostSetup>): void {
     this.hostsSetup = hostsSetup;
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     const form = this.form.value;
 
     const deploymentOrder = new DeploymentOrder();

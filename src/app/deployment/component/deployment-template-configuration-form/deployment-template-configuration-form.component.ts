@@ -45,26 +45,23 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
 
   public onApplicationChange(applicationSelected: Application): void {
     if (applicationSelected) {
-      this.applicationService.getById(applicationSelected.id)
-        .subscribe(application => {
-          this.application = application;
-          const dockerApplicationSetup = this.application.applicationSetup as unknown as DockerApplicationSetup;
+      this.application = this.applications.find(application => application.id === applicationSelected.id);
+      const dockerApplicationSetup = this.application.applicationSetup as unknown as DockerApplicationSetup;
 
-          this.ports = Object.entries(dockerApplicationSetup.ports).map(([key, value]) => new KeyValuePair(key, value));
-          this.environmentVariables = Object.entries(dockerApplicationSetup.environmentVariables).map(([key, value]) => new KeyValuePair(key, value));
-        });
+      this.ports = Object.entries(dockerApplicationSetup.ports).map(([key, value]) => new KeyValuePair(key, value));
+      this.environmentVariables = Object.entries(dockerApplicationSetup.environmentVariables).map(([key, value]) => new KeyValuePair(key, value));
     }
   }
 
-  public onEnvironmentVariablesChange(environmentVariables: Array<KeyValuePair>) {
+  public onEnvironmentVariablesChange(environmentVariables: Array<KeyValuePair>): void {
     this.environmentVariablesUpdated = environmentVariables;
   }
 
-  public onHostsSetupChange(hostsSetup: Array<HostSetup>) {
+  public onHostsSetupChange(hostsSetup: Array<HostSetup>): void {
     this.hostsSetup = hostsSetup;
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     const form = this.form.value;
 
     const deploymentTemplate = new DeploymentTemplate();
