@@ -45,7 +45,6 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
 
   public onApplicationChange(applicationSelected: Application): void {
     if (applicationSelected) {
-      console.log('entro');
       this.applicationService.getById(applicationSelected.id)
         .subscribe(application => {
           this.application = application;
@@ -78,7 +77,7 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
       (map[environmentVariable.key] = environmentVariable.value, map), new Map<string, string>());
     deploymentTemplate.applicationSetup = dockerApplicationSetup;
 
-    this.deploymentTemplateService.saveDeploymentTemplateSetup(deploymentTemplate).subscribe();
+    this.deploymentTemplateService.saveDeploymentTemplate(deploymentTemplate).subscribe();
   }
 
 }
