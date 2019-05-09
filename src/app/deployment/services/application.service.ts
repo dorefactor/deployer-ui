@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApplicationSetup } from '../model/application-setup';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Application } from '../model/application';
@@ -18,12 +17,12 @@ export class ApplicationService {
       JSON.stringify(application));
   }
 
-  public getApplications(): Observable<ApplicationSetup[]> {
-    return this.httpClient.get<ApplicationSetup[]>(this.APPLICATION_SETUP_RESOURCE_URI);
+  public getAll(): Observable<Application[]> {
+    return this.httpClient.get<Application[]>(this.APPLICATION_SETUP_RESOURCE_URI);
   }
 
-  public getApplicationById(id: string): Observable<ApplicationSetup> {
-    return this.httpClient.get<ApplicationSetup>(this.APPLICATION_SETUP_RESOURCE_URI + `/${id}`);
+  public getById(id: string): Observable<Application> {
+    return this.httpClient.get<Application>(this.APPLICATION_SETUP_RESOURCE_URI + `/${id}`);
   }
 
 }
