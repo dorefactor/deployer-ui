@@ -7,13 +7,13 @@
         </div>
         <div class="card-body">
           <div class="form-group form__control">
-            <ng-select [items]="deploymentTemplatesSetup" bindLabel="name" bindValue="id"
-              (change)="onDeploymentTemplateSetupChange($event)" placeholder="Deployment Templates"
-              formControlName="deploymentTemplateId"></ng-select>
+            <ng-select [items]="deploymentTemplates" [loading]="loadingDeploymentTemplates" bindLabel="name"
+              bindValue="id" (change)="onDeploymentTemplateChange($event)" formControlName="deploymentTemplateId"
+              placeholder="Deployment Templates"></ng-select>
           </div>
           <div class="form-group form__control">
             <mat-form-field>
-              <input matInput placeholder="Version to be Deployed" formControlName="version">
+              <input matInput placeholder="Tag to be Deployed" formControlName="tag">
             </mat-form-field>
           </div>
         </div>

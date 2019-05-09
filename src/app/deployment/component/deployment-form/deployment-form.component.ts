@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HostSetup } from '../../model/host-setup';
-import { DeploymentTemplateSetup } from '../../model/deployment-template-setup';
+import { DeploymentTemplate } from '../../model/deployment-template';
 import { DeploymentService as DeploymentService } from '../../services/deployment.service';
-import { Deployment } from '../../model/deployment';
+import { DeploymentOrder } from '../../model/deployment-order';
 import * as _ from 'lodash';
+import { DockerApplicationSetup } from '../../model/docker/docker-application-setup';
+import { Image } from '../../model/docker/image';
+import { ApplicationType } from '../../enums/application-type';
 
 @Component({
   selector: 'app-deployment-form',
@@ -15,9 +18,11 @@ export class DeploymentFormComponent implements OnInit {
 
   public hide = true;
   public form: FormGroup;
-  public deploymentTemplatesSetup: Array<DeploymentTemplateSetup>;
-  public deploymentTemplateSetup: DeploymentTemplateSetup;
+  public deploymentTemplates: Array<DeploymentTemplate>;
+  public deploymentTemplate: DeploymentTemplate;
   public hostsSetup: Array<HostSetup>;
+  public loadingDeploymentTemplates = true;
+
 
   constructor(private formBuilder: FormBuilder,
               private deploymentService: DeploymentService) { }
@@ -25,36 +30,45 @@ export class DeploymentFormComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.formBuilder.group({
       deploymentTemplateId: '',
-      version: ''
+      tag: ''
     });
 
-    this.deploymentService.getDeploymentTemplates().subscribe(deploymentTemplates => this.deploymentTemplatesSetup = deploymentTemplates);
+    this.deploymentService.getDeploymentTemplates()
+      .subscribe(deploymentTemplates => {
+        this.deploymentTemplates = deploymentTemplates;
+        this.loadingDeploymentTemplates = false;
+      });
   }
 
-  public onDeploymentTemplateSetupChange(deploymentTemplateSetupSelected: DeploymentTemplateSetup) {
-    if (deploymentTemplateSetupSelected) {
-      this.deploymentTemplateSetup = this.deploymentTemplatesSetup.find(deploymentTemplateSetup => deploymentTemplateSetup.id === deploymentTemplateSetupSelected.id);
-      if (this.deploymentTemplateSetup) {
-        this.hostsSetup = this.deploymentTemplateSetup.hostsSetup;
-      }
+  public onDeploymentTemplateChange(deploymentTemplateSelected: DeploymentTemplate): void {
+    if (deploymentTemplateSelected) {
+      this.deploymentTemplate = this.deploymentTemplates.find(deploymentTemplate => deploymentTemplate.id === deploymentTemplateSelected.id);
+      this.hostsSetup = this.deploymentTemplate.hostsSetup;
     } else {
       this.hostsSetup = [];
     }
   }
 
-  public onHostsSetupChange(hostsSetup: Array<HostSetup>) {
+  public onHostsSetupChange(hostsSetup: Array<HostSetup>): void {
     this.hostsSetup = hostsSetup;
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     const form = this.form.value;
 
-    const deployment = new Deployment();
-    deployment.deploymentTemplateId = form.deploymentTemplateId;
-    deployment.version = form.version;
-    deployment.hosts = this.getOnlyHostsSetupWithHostsSelected();
+    const deploymentOrder = new DeploymentOrder();
+    deploymentOrder.deploymentTemplateId = form.deploymentTemplateId;
+    deploymentOrder.hostsSetup = this.getOnlyHostsSetupWithHostsSelected();
 
-    this.deploymentService.createDeploymentOrder(deployment).subscribe();
+    const image = new Image();
+    image.tag = form.tag;
+
+    const dockerApplicationSetup = new DockerApplicationSetup();
+    dockerApplicationSetup.type = ApplicationType[ApplicationType.Docker];
+    dockerApplicationSetup.image = image;
+    deploymentOrder.applicationSetup = dockerApplicationSetup;
+
+    this.deploymentService.createDeploymentOrder(deploymentOrder).subscribe();
   }
 
   private getOnlyHostsSetupWithHostsSelected(): HostSetup[] {

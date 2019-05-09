@@ -96,7 +96,7 @@ export class HostSetupComponent implements OnInit, OnChanges {
   private createHostsSetupItem(hostSetup: HostSetup, select: boolean): FormGroup {
     const group = this.formBuilder.group({
       selected: select,
-      tagName: hostSetup ? hostSetup.tagName : '',
+      tag: hostSetup ? hostSetup.tag : '',
       hosts: hostSetup ? this.formBuilder.array([hostSetup.hosts]) : this.formBuilder.array([])
     });
 
