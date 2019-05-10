@@ -66,13 +66,16 @@ export class DeploymentTemplateConfigurationFormComponent implements OnInit {
 
     const deploymentTemplate = new DeploymentTemplate();
     deploymentTemplate.name = form.name;
-    deploymentTemplate.applicationId = form.applicationId;
     deploymentTemplate.hostsSetup = this.hostsSetup;
 
     const dockerApplicationSetup = this.application.applicationSetup as unknown as DockerApplicationSetup;
     dockerApplicationSetup.environmentVariables = this.environmentVariablesUpdated.reduce((map, environmentVariable) =>
       (map[environmentVariable.key] = environmentVariable.value, map), new Map<string, string>());
-    deploymentTemplate.applicationSetup = dockerApplicationSetup;
+
+    const application = new Application(dockerApplicationSetup);
+    application.id = form.applicationId;
+
+    deploymentTemplate.application = application;
 
     this.deploymentTemplateService.saveDeploymentTemplate(deploymentTemplate).subscribe();
   }

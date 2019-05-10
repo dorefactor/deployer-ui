@@ -54,9 +54,8 @@ export class ApplicationConfigurationFormComponent implements OnInit {
     applicationSetup.ports = this.ports.reduce((map, port) =>
       (map[port.key] = port.value, map), new Map<string, string>());
 
-    const application = new Application();
+    const application = new Application(applicationSetup);
     application.name = form.name;
-    application.applicationSetup = applicationSetup;
 
     this.applicationService.save(application).subscribe();
   }

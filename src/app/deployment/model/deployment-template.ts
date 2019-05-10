@@ -1,12 +1,11 @@
 import { HostSetup } from './host-setup';
-import { ApplicationSetup } from './application-setup';
+import { Application } from './application';
 
 export class DeploymentTemplate {
 
   public id: string;
   public name: string;
-  public applicationId: string;
-  public applicationSetup: ApplicationSetup;
+  public application: Application;
   public hostsSetup: Array<HostSetup>;
 
 }

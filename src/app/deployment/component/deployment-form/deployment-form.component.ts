@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { DockerApplicationSetup } from '../../model/docker/docker-application-setup';
 import { Image } from '../../model/docker/image';
 import { ApplicationType } from '../../enums/application-type';
+import { Application } from '../../model/application';
 
 @Component({
   selector: 'app-deployment-form',
@@ -22,7 +23,6 @@ export class DeploymentFormComponent implements OnInit {
   public deploymentTemplate: DeploymentTemplate;
   public hostsSetup: Array<HostSetup>;
   public loadingDeploymentTemplates = true;
-
 
   constructor(private formBuilder: FormBuilder,
               private deploymentService: DeploymentService) { }
@@ -66,7 +66,11 @@ export class DeploymentFormComponent implements OnInit {
     const dockerApplicationSetup = new DockerApplicationSetup();
     dockerApplicationSetup.type = ApplicationType[ApplicationType.Docker];
     dockerApplicationSetup.image = image;
-    deploymentOrder.applicationSetup = dockerApplicationSetup;
+
+    const application = new Application(dockerApplicationSetup);
+    application.id = this.deploymentTemplate.application.id;
+
+    deploymentOrder.application = application;
 
     this.deploymentService.createDeploymentOrder(deploymentOrder).subscribe();
   }

@@ -6,4 +6,8 @@ export class Application {
   public name: string;
   public applicationSetup: ApplicationSetup;
 
+  constructor(applicationSetup: ApplicationSetup) {
+    this.applicationSetup = applicationSetup;
+  }
+
 }
