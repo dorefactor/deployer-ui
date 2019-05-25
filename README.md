@@ -13,7 +13,7 @@
 * Run server
 
 ```sh
-ng serve
+ng serve --host 0.0.0.0 --public-host deployer-ui.local
 ```
 
 * Create a loopback network alias
