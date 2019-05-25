@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  domain: 'http://192.168.99.1:5000'
+  domain: 'http://regular-api.local:5000'
 };
 
 /*

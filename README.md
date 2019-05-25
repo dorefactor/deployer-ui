@@ -1,27 +1,45 @@
-# RegularDeployerUi
+# **Deployer Ui**
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+## **Prerequisites**
 
-## Development server
+* NodeJs 10+
+* Yarn 1.16+
+* [AVN](https://www.npmjs.com/package/avn)
+* [Angular CLI](https://github.com/angular/angular-cli)
+* [RegularApi](https://github.com/dorefactor/RegularApi)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## **Steps**
 
-## Code scaffolding
+* Run server
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```sh
+ng serve
+```
 
-## Build
+* Create a loopback network alias
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+  * OSX
 
-## Running unit tests
+    ```sh
+    ifconfig lo0 alias 192.168.99.1
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  * Linux
 
-## Running end-to-end tests
+    ```sh
+    echo `auto lo lo:10
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+    iface lo inet loopback
+    iface lo:10 inet static
+        address 192.168.99.1
+        netmask 255.255.255.0
+        network 192.168.99.1` >> /etc/network/interfaces
+    ```
 
-## Further help
+* Map in `/etc/hosts`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```file
+192.168.99.1    deployer-ui
+```
+
+* Go to UI at [http://deployer-ui.local:4200](http://deployer-ui.local:4200)
