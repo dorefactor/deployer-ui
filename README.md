@@ -1,4 +1,4 @@
-# **Deployer Ui**
+# **Deployer UI**
 
 ## **Prerequisites**
 
