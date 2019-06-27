@@ -24,7 +24,6 @@ export class TuplaThreeComponent implements OnInit {
   @Output()
   public tuplaThreeChange: EventEmitter<Array<TuplaThree>> = new EventEmitter<Array<TuplaThree>>();
 
-  public hide = true;
   public form: FormGroup;
   public tuplaThreeFormArray: FormArray;
   public isEdit: boolean;

@@ -39,9 +39,7 @@
               </div>
               <div class="col">
                 <mat-form-field>
-                  <input matInput placeholder="{{ valuePlaceholder3 }}" formControlName="value3" [type]="hide ? 'password' : 'text'">
-                  <mat-icon matSuffix (click)="hide = !hide" [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-eye'">
-                  </mat-icon>
+                  <input matInput placeholder="{{ valuePlaceholder3 }}" formControlName="value3" type="password" appShowHideText>
                 </mat-form-field>
               </div>
             </div>

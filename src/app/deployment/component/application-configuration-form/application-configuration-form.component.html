@@ -1,4 +1,7 @@
 <div class="content">
+
+  <h1 class="title">Application Configuration</h1>
+
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="card__container">
       <div class="card">
@@ -22,14 +25,38 @@
         <div class="card-body">
           <div class="form-group">
             <div class="row">
+              <div formGroupName="image" class="col">
+                <mat-form-field>
+                  <input matInput formControlName="name" placeholder="Image">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div formGroupName="registry" class="col">
+                  <mat-checkbox formControlName="isPrivate" (change)="isPrivateRegistry = !isPrivateRegistry">Is Private
+                    Registry?
+                  </mat-checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isPrivateRegistry" class="form-group">
+            <div class="row">
               <div formGroupName="registry" class="col">
                 <mat-form-field>
                   <input matInput formControlName="url" placeholder="Registry Url">
                 </mat-form-field>
               </div>
-              <div formGroupName="image" class="col">
+              <div formGroupName="registry" class="col">
                 <mat-form-field>
-                  <input matInput formControlName="name" placeholder="Image">
+                  <input matInput formControlName="username" placeholder="Registry Username">
+                </mat-form-field>
+              </div>
+              <div formGroupName="registry" class="col">
+                <mat-form-field>
+                  <input matInput formControlName="password" placeholder="Registry Password" type="password"
+                    appShowHideText>
                 </mat-form-field>
               </div>
             </div>
@@ -46,7 +73,23 @@
             <div>
               <app-key-value-pair [title]="'Exposed Ports'" [keyPlaceholder]="'External Port'"
                 [valuePlaceholder]="'Internal Port'" [disabledKeyEdition]="false" [disabledValueEdition]="false"
-                (keyValuePairsChange)="onPortsChange($event)">
+                [maskValueInput]="false" (keyValuePairsChange)="onPortsChange($event)">
+              </app-key-value-pair>
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              <app-key-value-pair [title]="'Extra Hosts'" [keyPlaceholder]="'Host Alias'"
+                [valuePlaceholder]="'Ip Address'" [disabledKeyEdition]="false" [showValueInput]="false"
+                (keyValuePairsChange)="onExtraHostsChange($event)">
+              </app-key-value-pair>
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              <app-key-value-pair [title]="'Volumes'" [keyPlaceholder]="'Internal Mount Path'"
+                [valuePlaceholder]="'External Mounth Path'" [disabledKeyEdition]="false" [showValueInput]="false"
+                (keyValuePairsChange)="onVolumesChange($event)">
               </app-key-value-pair>
             </div>
           </div>

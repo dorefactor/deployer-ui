@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "regular-deployer-ui": {
+    "rd-ui": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/regular-deployer-ui",
+            "outputPath": "dist/rd-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,6 +28,8 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/solid.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css",
               "src/styles.sass"
             ],
             "scripts": [],
@@ -63,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "regular-deployer-ui:build"
+            "browserTarget": "rd-ui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "regular-deployer-ui:build:production"
+              "browserTarget": "rd-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "regular-deployer-ui:build"
+            "browserTarget": "rd-ui:build"
           }
         },
         "test": {
@@ -108,7 +110,7 @@
         }
       }
     },
-    "regular-deployer-ui-e2e": {
+    "rd-ui-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -117,11 +119,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "regular-deployer-ui:serve"
+            "devServerTarget": "rd-ui:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "regular-deployer-ui:serve:production"
+              "devServerTarget": "rd-ui:serve:production"
             }
           }
         },
@@ -137,5 +139,5 @@
       }
     }
   },
-  "defaultProject": "regular-deployer-ui"
+  "defaultProject": "rd-ui"
 }
