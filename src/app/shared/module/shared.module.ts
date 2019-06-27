@@ -5,18 +5,21 @@ import { TuplaThreeComponent } from '../component/tupla-three/tupla-three.compon
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ContentTypeInterceptor } from '../interceptor/content-type.interceptor';
+import { ShowHideTextDirective } from '../directive/show-hide-text.directive';
 
 @NgModule({
   declarations: [
     KeyValuePairComponent,
-    TuplaThreeComponent
+    TuplaThreeComponent,
+    ShowHideTextDirective
   ],
   imports: [
     AngularMaterialModule,
     FontAwesomeModule
   ],
   exports: [
-    KeyValuePairComponent
+    KeyValuePairComponent,
+    ShowHideTextDirective
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

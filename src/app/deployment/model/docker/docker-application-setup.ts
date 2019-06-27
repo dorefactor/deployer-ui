@@ -8,5 +8,7 @@ export class DockerApplicationSetup extends ApplicationSetup {
   public image: Image;
   public ports: Map<string, string>;
   public environmentVariables: Map<string, string>;
+  public extraHosts: Map<string, string>;
+  public volumes: Map<string, string>;
 
 }

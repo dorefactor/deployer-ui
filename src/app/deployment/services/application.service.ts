@@ -7,7 +7,7 @@ import { Application } from '../model/application';
 @Injectable()
 export class ApplicationService {
 
-  private APPLICATION_SETUP_RESOURCE_URI = `${environment.domain}/configuration/applications`;
+  private APPLICATION_SETUP_RESOURCE_URI = `${environment.rd_api}/configuration/applications`;
 
   constructor(private httpClient: HttpClient) {
   }

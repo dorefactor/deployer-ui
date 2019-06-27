@@ -8,8 +8,8 @@ import { DeploymentOrder } from '../model/deployment-order';
 @Injectable()
 export class DeploymentService {
 
-  private DEPLOYMENT_TEMPLATE_SETUP_RESOURCE_URI = `${environment.domain}/configuration/deployment-templates`;
-  private DEPLOYMENT_ORDER_RESOURCE_URI = `${environment.domain}/deployment-orders`;
+  private DEPLOYMENT_TEMPLATE_SETUP_RESOURCE_URI = `${environment.rd_api}/configuration/deployment-templates`;
+  private DEPLOYMENT_ORDER_RESOURCE_URI = `${environment.rd_api}/deployment-orders`;
 
   constructor(private httpClient: HttpClient) {
   }

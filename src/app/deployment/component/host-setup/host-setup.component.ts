@@ -20,7 +20,6 @@ export class HostSetupComponent implements OnInit, OnChanges {
   public hostsSetupChange: EventEmitter<Array<HostSetup>> = new EventEmitter<Array<HostSetup>>();
 
   public form: FormGroup;
-  public hide = true;
   public isEditHostsSetup: boolean;
   public isEditHosts: boolean;
 

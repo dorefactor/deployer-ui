@@ -50,7 +50,8 @@
               </div>
               <div *ngIf="showValueInput" class="col">
                 <mat-form-field>
-                  <input matInput placeholder="{{ valuePlaceholder }}" formControlName="value">
+                  <input matInput *ngIf="maskValueInput" placeholder="{{ valuePlaceholder }}" formControlName="value" type="password" appShowHideText>
+                  <input matInput *ngIf="!maskValueInput" placeholder="{{ valuePlaceholder }}" formControlName="value" type="text">
                 </mat-form-field>
               </div>
             </div>

@@ -144,16 +144,8 @@
                             </div>
                             <div class="col">
                               <mat-form-field>
-                                <div class="password">
-                                  <div class="password__input-text">
-                                    <input matInput placeholder="Password" formControlName="password"
-                                      [type]="hide ? 'password' : 'text'">
-                                  </div>
-                                  <div (click)="hide = !hide" class="password__icon">
-                                    <fa-icon matSuffix [icon]="hide ? ['fa', 'eye-slash'] : ['fa', 'eye']"
-                                      class="icon__cursor-pointer"></fa-icon>
-                                  </div>
-                                </div>
+                                <input matInput placeholder="Password" formControlName="password" type="password"
+                                  appShowHideText>
                               </mat-form-field>
                             </div>
                           </div>

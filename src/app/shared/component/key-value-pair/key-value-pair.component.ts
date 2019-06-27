@@ -45,6 +45,9 @@ export class KeyValuePairComponent implements OnInit, OnChanges {
   @Input()
   public canSaveElement = true;
 
+  @Input()
+  public maskValueInput = true;
+
   @Output()
   public keyValuePairsChange: EventEmitter<Array<KeyValuePair>> = new EventEmitter<Array<KeyValuePair>>();
 
